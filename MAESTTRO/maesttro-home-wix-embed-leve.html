@@ -1,0 +1,3758 @@
+<!--
+  Projeto MAESTTRO - HOME Wix Embed LEVE
+  Antes de colar no Wix, suba as imagens da pasta assets no Media Manager do Wix
+  e substitua as ocorrencias de ./assets/NOME-DO-ARQUIVO pela URL publica do Wix.
+-->
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projeto MAESTTRO | Quartetto Serenatta</title>
+    <style>
+:root {
+  --ink: #2f3332;
+  --text: #222624;
+  --muted: #6d7673;
+  --paper: #fffdf8;
+  --cream: #f7efe0;
+  --champagne: #ead8b2;
+  --gold: #b89652;
+  --sage: #80907f;
+  --rose: #be8f85;
+  --blue: #8294a2;
+  --line: rgba(47, 51, 50, 0.13);
+  --shadow: 0 24px 70px rgba(47, 51, 50, 0.13);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 15% 8%, rgba(234, 216, 178, 0.62), transparent 28%),
+    linear-gradient(180deg, #fffdf8 0%, #f7efe0 42%, #fffaf0 100%);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 14px clamp(18px, 4vw, 58px);
+  background: rgba(255, 253, 248, 0.84);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(18px);
+}
+
+.brand-lockup {
+  display: flex;
+  min-width: 280px;
+  align-items: center;
+  gap: 18px;
+}
+
+.brand-lockup img {
+  width: 210px;
+  max-width: 48vw;
+}
+
+.brand-lockup span {
+  max-width: 330px;
+  border-left: 1px solid var(--line);
+  color: var(--muted);
+  padding-left: 18px;
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.topbar nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.topbar a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 760;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+  gap: clamp(26px, 5vw, 70px);
+  align-items: center;
+  min-height: calc(100vh - 76px);
+  padding: 52px clamp(18px, 5vw, 76px) 66px;
+}
+
+.hero-copy {
+  max-width: 760px;
+}
+
+.eyebrow,
+.section-title span,
+.set-intro span,
+.set-summary span,
+.spotify-section span,
+.checkout-preview span {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+.floating-card strong,
+.set-summary strong,
+.checkout-card strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+}
+
+h1 {
+  margin: 14px 0 20px;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.94;
+  letter-spacing: 0;
+}
+
+.hero p {
+  max-width: 650px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.primary,
+.soft {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0 22px;
+  font-weight: 850;
+}
+
+.primary {
+  border: 0;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 0 18px 42px rgba(47, 51, 50, 0.18);
+}
+
+.soft {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--text);
+}
+
+.hero-visual {
+  position: relative;
+  min-height: 620px;
+  overflow: hidden;
+  border-radius: 44px;
+  box-shadow: var(--shadow);
+}
+
+.hero-visual > img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: 38% center;
+}
+
+.hero-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(47, 51, 50, 0.46), transparent 58%);
+}
+
+.floating-card {
+  position: absolute;
+  z-index: 1;
+  left: 26px;
+  right: 26px;
+  bottom: 26px;
+  border: 1px solid rgba(255, 253, 248, 0.36);
+  border-radius: 28px;
+  background: rgba(255, 253, 248, 0.82);
+  padding: 22px;
+  backdrop-filter: blur(16px);
+}
+
+.floating-card span {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.floating-card strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 34px;
+  line-height: 1.04;
+}
+
+.floating-card small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.concierge,
+.choices-section,
+.set-section,
+.spotify-section,
+.checkout-preview,
+.stream-section,
+.preview-section,
+.travel-section,
+.admin-section,
+.category-section,
+.about-section,
+.lead-section {
+  padding: 72px clamp(18px, 5vw, 76px);
+}
+
+.section-title {
+  max-width: 900px;
+  margin-bottom: 28px;
+}
+
+.section-title p {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.section-title h2,
+.set-intro h2,
+.spotify-section h2,
+.checkout-preview h2 {
+  margin: 10px 0 0;
+  font-size: clamp(38px, 5vw, 72px);
+  line-height: 0.98;
+}
+
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.question-card {
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background: rgba(255, 253, 248, 0.76);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.question-card.wide {
+  grid-column: span 2;
+}
+
+.question-card > span {
+  color: var(--gold);
+  font-weight: 900;
+}
+
+.question-card h3 {
+  margin: 12px 0 18px;
+  font-size: 28px;
+  line-height: 1.05;
+}
+
+.option-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.option-row button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  color: var(--text);
+  padding: 10px 13px;
+  font-weight: 750;
+}
+
+.option-row button.active {
+  border-color: var(--gold);
+  background: #fff0c8;
+  color: #6d4f16;
+}
+
+.story-input {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: white;
+  color: var(--text);
+  padding: 14px 15px;
+  outline: none;
+}
+
+textarea {
+  min-height: 138px;
+  resize: vertical;
+}
+
+.story-input button,
+#analyze-spotify {
+  border: 0;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #241a08;
+  padding: 0 18px;
+  font-weight: 900;
+}
+
+.category-section {
+  background: linear-gradient(180deg, #fffdf8 0%, #f7efe0 100%);
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr 0.95fr 0.75fr;
+  gap: 16px;
+}
+
+.category-card {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  border-radius: 34px;
+  background: white;
+  box-shadow: var(--shadow);
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.category-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(47, 51, 50, 0.72), rgba(47, 51, 50, 0.08) 62%);
+}
+
+.category-card div {
+  position: absolute;
+  z-index: 1;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+}
+
+.category-card span {
+  color: var(--champagne);
+  font-weight: 900;
+}
+
+.category-card h3 {
+  margin: 8px 0;
+  font-size: 36px;
+}
+
+.category-card p {
+  color: rgba(255, 253, 248, 0.76);
+  line-height: 1.55;
+}
+
+.muted-card {
+  background: var(--ink);
+}
+
+.muted-card::after {
+  display: none;
+}
+
+.about-section {
+  background: #fffdf8;
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(340px, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(26px, 5vw, 70px);
+  align-items: center;
+}
+
+.about-media {
+  position: relative;
+  min-height: 620px;
+  overflow: hidden;
+  border-radius: 40px;
+  box-shadow: var(--shadow);
+}
+
+.about-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-copy > span {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.about-copy h2 {
+  margin: 14px 0 18px;
+  font-size: clamp(36px, 5vw, 68px);
+  line-height: 1;
+}
+
+.standalone-about {
+  min-height: calc(100vh - 76px);
+  display: grid;
+  align-items: center;
+}
+
+.standalone-about .about-copy h1 {
+  margin: 14px 0 18px;
+  font-size: clamp(42px, 5.6vw, 78px);
+  line-height: 0.98;
+}
+
+.about-copy > p {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.about-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.about-highlights article {
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: #fffaf0;
+  padding: 18px;
+}
+
+.about-highlights strong {
+  display: block;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.about-highlights p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.about-signature {
+  margin-top: 22px;
+  border-left: 3px solid var(--gold);
+  color: var(--ink);
+  padding-left: 18px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+  line-height: 1.25;
+}
+
+.lead-section {
+  background:
+    linear-gradient(90deg, rgba(255, 253, 248, 0.96), rgba(255, 253, 248, 0.78)),
+    url("./assets/ceremony-garden.png") center/cover;
+}
+
+.contract-section {
+  padding: 72px clamp(18px, 5vw, 76px);
+}
+
+.contract-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 24px;
+  align-items: start;
+}
+
+.contract-form {
+  display: grid;
+  gap: 18px;
+}
+
+.contract-block {
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background: rgba(255, 253, 248, 0.9);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.contract-block h2 {
+  margin: 0 0 18px;
+  font-size: 34px;
+}
+
+.contract-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.contract-grid.compact {
+  margin-top: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.contract-grid .wide {
+  grid-column: span 2;
+}
+
+.contract-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.contract-form input,
+.contract-form textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: white;
+  color: var(--text);
+  padding: 14px 15px;
+}
+
+.contract-form textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.payment-options {
+  display: grid;
+  gap: 10px;
+}
+
+.payment-options label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: white;
+  color: var(--text);
+  padding: 13px 14px;
+}
+
+.payment-options input {
+  width: auto;
+}
+
+.contract-summary {
+  position: sticky;
+  top: 96px;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.contract-summary > span {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.contract-summary > strong {
+  display: block;
+  margin: 10px 0 18px;
+  color: var(--gold);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 44px;
+  font-weight: 500;
+}
+
+.contract-event-summary,
+.payment-summary {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.payment-summary h3 {
+  margin: 8px 0;
+  color: var(--paper);
+  font-size: 25px;
+}
+
+.contract-line {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 253, 248, 0.14);
+  padding-top: 10px;
+  color: rgba(255, 253, 248, 0.72);
+}
+
+.contract-line b {
+  color: var(--paper);
+  text-align: right;
+}
+
+.contract-summary .soft {
+  width: 100%;
+  margin-top: 10px;
+  color: var(--paper);
+  border-color: rgba(255, 253, 248, 0.22);
+  background: rgba(255, 253, 248, 0.08);
+}
+
+.lead-form {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 34px;
+  background: rgba(255, 253, 248, 0.9);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.lead-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.lead-form select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: white;
+  color: var(--text);
+  padding: 14px 15px;
+}
+
+.date-status {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.date-status.available {
+  color: #3f6f4c;
+}
+
+.date-status.blocked {
+  color: #9d3f35;
+}
+
+.lead-consent {
+  grid-column: span 3;
+  display: flex !important;
+  align-items: center;
+  gap: 10px !important;
+}
+
+.lead-consent input {
+  width: auto;
+}
+
+.lead-form .primary {
+  align-self: end;
+}
+
+.lead-success {
+  margin-top: 16px;
+  border-radius: 24px;
+  background: #eef4ee;
+  color: #405746;
+  padding: 18px;
+  font-weight: 800;
+}
+
+.locked-section.locked {
+  position: relative;
+}
+
+.hidden-until-ready {
+  display: none !important;
+}
+
+.locked-section.locked::after {
+  content: "Cadastre o evento acima para liberar a recomendação personalizada do MAESTTRO.";
+  position: absolute;
+  inset: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 34px;
+  background: rgba(255, 253, 248, 0.78);
+  color: var(--ink);
+  font-weight: 900;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  pointer-events: auto;
+}
+
+.choices-section {
+  background:
+    linear-gradient(180deg, #fffdf8, #f7efe0);
+}
+
+.lead-context-card {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.lead-context-card p {
+  color: rgba(255, 253, 248, 0.74);
+  line-height: 1.6;
+}
+
+.context-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.context-tags span {
+  border: 1px solid rgba(255, 253, 248, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.1);
+  color: var(--champagne);
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.choices-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+.choice-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.choice-heading h3 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.choice-heading span {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.choice-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: white;
+  color: var(--text);
+  padding: 0 0 16px;
+  text-align: left;
+  box-shadow: 0 16px 45px rgba(47, 51, 50, 0.1);
+}
+
+.choice-card.active {
+  border-color: var(--gold);
+  background: #fff6de;
+  box-shadow: 0 18px 55px rgba(184, 150, 82, 0.2);
+}
+
+.choice-card img {
+  width: 100%;
+  height: 128px;
+  object-fit: cover;
+}
+
+.choice-card span,
+.music-choice-card span {
+  display: block;
+  margin: 13px 14px 6px;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.choice-card strong,
+.choice-card small {
+  display: block;
+  margin-inline: 14px;
+}
+
+.choice-card small {
+  margin-top: 7px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.choice-summary {
+  position: sticky;
+  top: 96px;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.choice-summary span {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.choice-summary strong {
+  display: block;
+  margin-top: 10px;
+  color: var(--gold);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 44px;
+  font-weight: 500;
+}
+
+.choice-summary p {
+  color: rgba(255, 253, 248, 0.74);
+  line-height: 1.65;
+}
+
+.choice-summary .contract-link {
+  width: 100%;
+  margin-top: 10px;
+  color: var(--paper);
+  border-color: rgba(255, 253, 248, 0.22);
+  background: rgba(255, 253, 248, 0.08);
+}
+
+.music-choice-area {
+  grid-column: 1 / -1;
+}
+
+.music-choice-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.music-choice-card {
+  display: grid;
+  grid-template-columns: 150px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: rgba(255, 253, 248, 0.88);
+  box-shadow: 0 16px 45px rgba(47, 51, 50, 0.08);
+  padding: 12px;
+}
+
+.music-choice-card img {
+  width: 150px;
+  height: 96px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.music-choice-card span {
+  margin: 0 0 5px;
+}
+
+.music-choice-card strong,
+.music-choice-card small {
+  display: block;
+}
+
+.music-choice-card small {
+  margin-top: 5px;
+  color: var(--muted);
+}
+
+.music-choice-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.music-choice-actions button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  padding: 9px 12px;
+  font-weight: 850;
+}
+
+.set-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  align-items: start;
+  background: linear-gradient(180deg, #f7efe0, #fffdf8);
+}
+
+.set-intro {
+  grid-column: 1 / -1;
+}
+
+.set-intro p,
+.spotify-section p,
+.checkout-preview p {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.set-summary,
+.checkout-card {
+  position: sticky;
+  top: 96px;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.set-summary strong,
+.checkout-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 38px;
+  line-height: 1;
+}
+
+.set-summary p {
+  color: rgba(255, 253, 248, 0.74);
+  line-height: 1.65;
+}
+
+.set-summary .primary,
+.checkout-card .primary {
+  width: 100%;
+  background: var(--gold);
+  color: #211707;
+}
+
+.timeline {
+  display: grid;
+  gap: 14px;
+}
+
+.moment-card {
+  display: grid;
+  grid-template-columns: 170px 1fr auto;
+  gap: 18px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background: rgba(255, 253, 248, 0.86);
+  box-shadow: 0 18px 45px rgba(47, 51, 50, 0.09);
+  padding: 14px;
+}
+
+.moment-card img {
+  width: 170px;
+  height: 120px;
+  border-radius: 22px;
+  object-fit: cover;
+}
+
+.moment-card span {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.moment-card h3 {
+  margin: 6px 0;
+  font-size: 27px;
+}
+
+.moment-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.moment-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.moment-actions button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  padding: 9px 12px;
+  font-weight: 800;
+}
+
+.spotify-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+  gap: 34px;
+  align-items: start;
+  background:
+    linear-gradient(90deg, rgba(255, 253, 248, 0.92), rgba(255, 253, 248, 0.62)),
+    url("./assets/music-details.png") center/cover;
+}
+
+.spotify-box {
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: rgba(255, 253, 248, 0.88);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.spotify-box label {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.spotify-box input,
+.spotify-box textarea {
+  margin-top: 8px;
+}
+
+.spotify-result {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.spotify-fit {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  border-radius: 18px;
+  background: white;
+  border: 1px solid var(--line);
+  padding: 13px;
+}
+
+.spotify-fit strong {
+  display: block;
+}
+
+.spotify-fit span {
+  color: var(--sage);
+  font-size: 13px;
+}
+
+.checkout-preview {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+  align-items: center;
+}
+
+.checkout-card {
+  position: static;
+}
+
+.checkout-card strong {
+  color: var(--gold);
+}
+
+.checkout-card ul {
+  margin: 18px 0 0;
+  padding-left: 18px;
+  color: rgba(255, 253, 248, 0.76);
+  line-height: 1.8;
+}
+
+.stream-section {
+  background: linear-gradient(180deg, #fffdf8 0%, #f2eadb 100%);
+}
+
+.stream-title {
+  max-width: 1040px;
+}
+
+.stream-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 25vw);
+  gap: 18px;
+  overflow-x: auto;
+  padding: 8px 0 22px;
+  scroll-snap-type: x mandatory;
+}
+
+.stream-card {
+  position: relative;
+  min-height: 430px;
+  overflow: hidden;
+  border-radius: 34px;
+  box-shadow: var(--shadow);
+  scroll-snap-align: start;
+}
+
+.stream-card img,
+.preview-main img,
+.preview-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stream-card::after,
+.preview-main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(47, 51, 50, 0.74), transparent 58%);
+}
+
+.stream-card div {
+  position: absolute;
+  z-index: 1;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  color: white;
+}
+
+.stream-card span,
+.preview-main span,
+.travel-card span {
+  color: var(--champagne);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.stream-card h3 {
+  margin: 8px 0;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.stream-card p {
+  color: rgba(255, 253, 248, 0.76);
+  line-height: 1.55;
+}
+
+.preview-section {
+  background:
+    linear-gradient(180deg, rgba(47, 51, 50, 0.96), rgba(47, 51, 50, 0.9)),
+    url("./assets/celebration-light.png") center/cover;
+  color: var(--paper);
+}
+
+.preview-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  gap: 20px;
+}
+
+.preview-main {
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+  border-radius: 36px;
+  box-shadow: 0 28px 92px rgba(0, 0, 0, 0.28);
+}
+
+.empty-preview {
+  background: linear-gradient(135deg, rgba(255, 253, 248, 0.12), rgba(184, 150, 82, 0.26));
+}
+
+.preview-main-content {
+  position: absolute;
+  z-index: 1;
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
+}
+
+.preview-main h3 {
+  margin: 10px 0;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 0.98;
+}
+
+.preview-main p {
+  max-width: 660px;
+  color: rgba(255, 253, 248, 0.76);
+  line-height: 1.65;
+}
+
+.preview-list {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.preview-thumb {
+  display: grid;
+  grid-template-columns: 132px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  border: 1px solid rgba(255, 253, 248, 0.16);
+  border-radius: 24px;
+  background: rgba(255, 253, 248, 0.1);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.preview-thumb img {
+  width: 132px;
+  height: 86px;
+  border-radius: 18px;
+}
+
+.preview-thumb strong {
+  display: block;
+}
+
+.preview-thumb span {
+  color: rgba(255, 253, 248, 0.62);
+  font-size: 13px;
+}
+
+.play-dot {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.travel-section {
+  background: #fffaf0;
+}
+
+.travel-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(280px, 1fr) minmax(300px, 0.9fr);
+  gap: 18px;
+}
+
+.travel-card,
+.travel-result,
+.admin-card {
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background: rgba(255, 253, 248, 0.84);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.travel-card h3,
+.admin-card h3 {
+  margin: 0 0 14px;
+  font-size: 29px;
+}
+
+.travel-card p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.travel-card label,
+.admin-card label {
+  display: block;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.travel-card input,
+.admin-card input,
+.admin-card select {
+  margin-top: 8px;
+}
+
+.checkline {
+  display: flex !important;
+  align-items: center;
+  gap: 9px;
+}
+
+.checkline input {
+  width: auto;
+  margin: 0;
+}
+
+.instrument-pills,
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.instrument-pills button,
+.chip-list span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  color: var(--text);
+  padding: 9px 12px;
+  font-weight: 800;
+}
+
+.instrument-pills button.active {
+  border-color: var(--gold);
+  background: #fff0c8;
+}
+
+.travel-result {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.travel-result strong {
+  display: block;
+  margin: 8px 0 16px;
+  color: var(--gold);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 44px;
+  font-weight: 500;
+}
+
+.travel-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid rgba(255, 253, 248, 0.14);
+  padding: 12px 0;
+  color: rgba(255, 253, 248, 0.76);
+}
+
+.admin-section {
+  background: linear-gradient(180deg, #f7efe0, #fffdf8);
+}
+
+.admin-login-section {
+  display: grid;
+  min-height: calc(100vh - 76px);
+  place-items: center;
+  padding: 72px clamp(18px, 5vw, 76px);
+  background:
+    linear-gradient(90deg, rgba(255, 253, 248, 0.96), rgba(255, 253, 248, 0.72)),
+    url("./assets/music-details.png") center/cover;
+}
+
+.admin-login-card {
+  width: min(720px, 100%);
+  border: 1px solid var(--line);
+  border-radius: 36px;
+  background: rgba(255, 253, 248, 0.92);
+  box-shadow: var(--shadow);
+  padding: clamp(24px, 5vw, 44px);
+}
+
+.admin-login-card > span {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.admin-login-card h1 {
+  margin: 12px 0 14px;
+  font-size: clamp(42px, 6vw, 72px);
+}
+
+.admin-login-card p {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.admin-login-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.admin-login-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.admin-login-form input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: white;
+  color: var(--text);
+  padding: 14px 15px;
+}
+
+.admin-login-message {
+  margin-top: 14px;
+  border-radius: 18px;
+  background: #fff2ef;
+  color: #8f332a;
+  padding: 13px 14px;
+  font-weight: 850;
+}
+
+.admin-protected[hidden] {
+  display: none !important;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.admin-card {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.admin-card-wide {
+  grid-column: span 2;
+}
+
+.admin-note {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.admin-calendar-form {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.file-drop {
+  display: grid !important;
+  min-height: 92px;
+  place-items: center;
+  border: 1px dashed rgba(184, 150, 82, 0.48);
+  border-radius: 20px;
+  background: #fff2cb;
+  color: #6d4f16 !important;
+  cursor: pointer;
+}
+
+.file-drop input {
+  display: none;
+}
+
+.admin-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.admin-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: white;
+  padding: 10px;
+}
+
+.admin-media-row {
+  grid-template-columns: 74px minmax(0, 1fr) auto;
+}
+
+.admin-media-row img {
+  width: 74px;
+  height: 58px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #efe7da;
+}
+
+.admin-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.admin-row-actions button,
+.admin-media-row > button {
+  padding: 9px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.admin-row small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-row input {
+  max-width: 110px;
+  padding: 9px;
+}
+
+.blocked-date-list {
+  display: grid;
+  gap: 8px;
+}
+
+.blocked-date-row,
+.empty-state {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: white;
+  padding: 12px;
+}
+
+.blocked-date-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.blocked-date-row small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+}
+
+.blocked-date-row button {
+  border: 1px solid rgba(157, 63, 53, 0.24);
+  border-radius: 999px;
+  background: #fff2ef;
+  color: #8f332a;
+  padding: 9px 12px;
+  font-weight: 900;
+}
+
+.empty-state {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+dialog {
+  width: min(920px, 94vw);
+  border: 0;
+  border-radius: 34px;
+  padding: 0;
+  background: var(--paper);
+  color: var(--text);
+  box-shadow: 0 36px 120px rgba(47, 51, 50, 0.38);
+}
+
+dialog::backdrop {
+  background: rgba(47, 51, 50, 0.38);
+  backdrop-filter: blur(6px);
+}
+
+dialog[open] {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  overflow: hidden;
+}
+
+dialog img {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  object-fit: cover;
+}
+
+dialog > div {
+  padding: 38px;
+}
+
+.dialog-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 1;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(47, 51, 50, 0.78);
+  color: white;
+  padding: 10px 14px;
+}
+
+#dialog-moment {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+#dialog-title {
+  margin: 12px 0;
+  font-size: 54px;
+  line-height: 1;
+}
+
+#dialog-copy {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.dialog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.dialog-tags span {
+  border-radius: 999px;
+  background: #f4ead2;
+  color: #6d4f16;
+  padding: 8px 11px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+@media (max-width: 1050px) {
+  .hero,
+  .about-layout,
+  .choices-layout,
+  .set-section,
+  .spotify-section,
+  .contract-layout,
+  .checkout-preview,
+  .preview-layout,
+  .travel-grid,
+  .admin-grid,
+  .category-grid,
+  dialog[open] {
+    grid-template-columns: 1fr;
+  }
+
+  .question-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .set-summary,
+  .contract-summary {
+    position: static;
+  }
+
+  .admin-card-wide {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .topbar nav {
+    display: none;
+  }
+
+  .brand-lockup {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .brand-lockup span {
+    max-width: 180px;
+    font-size: 11px;
+  }
+
+  .hero {
+    padding-top: 34px;
+  }
+
+  .hero-visual {
+    min-height: 440px;
+  }
+
+  .question-grid,
+  .moment-card,
+  .music-choice-card,
+  .story-input,
+  .preview-thumb,
+  .lead-form,
+  .contract-grid,
+  .contract-grid.compact,
+  .admin-calendar-form {
+    grid-template-columns: 1fr;
+  }
+
+  .contract-grid .wide {
+    grid-column: auto;
+  }
+
+  .about-media {
+    min-height: 420px;
+  }
+
+  .about-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .question-card.wide {
+    grid-column: auto;
+  }
+
+  .lead-consent {
+    grid-column: auto;
+  }
+
+  .choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .choice-summary {
+    position: static;
+  }
+
+  .moment-card img {
+    width: 100%;
+  }
+}
+
+</style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-lockup">
+        <img src="./assets/logo-transparent.png" alt="Quartetto Serenatta" />
+        <span>A primeira plataforma self-service do mundo para contratar músicos ao vivo.</span>
+      </div>
+      <nav>
+        <a href="#categorias">Categorias</a>
+        <a href="#categorias">Quem somos</a>
+        <a href="#lead">Meu evento</a>
+        <a href="#previas">Prévias</a>
+        <a href="#spotify">Referências</a>
+        <a href="#previas">Admin</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Projeto MAESTTRO • Self-service musical</p>
+          <h1>A forma mais intuitiva de montar música ao vivo para um evento.</h1>
+          <p>Uma experiência inédita para contratar músicos: o cliente conta o essencial, refina a ocasião com poucas escolhas e recebe uma direção musical clara, sempre editável.</p>
+          <div class="hero-actions">
+            <a class="primary" href="#lead">Começar pelo meu evento</a>
+            <a class="soft" href="#categorias">Explorar categorias</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img id="hero-cover-image" src="./assets/capa-quartetto-serenatta.jpeg" alt="Quartetto Serenatta em apresentação" />
+          <div class="floating-card">
+            <span>MAESTTRO em ação</span>
+            <strong id="hero-recommendation">Quarteto de cordas + piano leve</strong>
+            <small>Uma jornada guiada para transformar intenção, repertório e formação em uma proposta musical sob medida.</small>
+          </div>
+        </div>
+      </section>
+
+      <section id="categorias" class="category-section">
+        <div class="section-title">
+          <span>Escolha a ocasião</span>
+          <h2>Cada tipo de evento abre uma experiência própria.</h2>
+        </div>
+        <div class="category-grid">
+          <a href="#lead" class="category-card">
+            <img data-home-image="casamento" src="./assets/ceremony-garden.png" alt="" />
+            <div><span>Casamento</span><h3>Cerimônia</h3><p>Rito, entradas, repertório afetivo e assinatura emocional do casal.</p></div>
+          </a>
+          <a href="#lead" class="category-card">
+            <img data-home-image="debutante" src="./assets/celebration-light.png" alt="" />
+            <div><span>Debutante</span><h3>15 anos</h3><p>Recepção, valsa, homenagens, entrada triunfal e pista sofisticada.</p></div>
+          </a>
+          <a href="#lead" class="category-card">
+            <img data-home-image="bodas" src="./assets/music-details.png" alt="" />
+            <div><span>Bodas</span><h3>História</h3><p>Releituras afetivas para celebrar décadas, família e memória.</p></div>
+          </a>
+          <a href="#lead" class="category-card muted-card">
+            <div><span>Mais categorias</span><h3>Aniversário, corporativo e tributo</h3><p>Sets por objetivo: celebrar, acolher, impressionar ou homenagear.</p></div>
+          </a>
+        </div>
+      </section>
+
+      <section id="lead" class="lead-section">
+        <div class="section-title">
+          <span>Sua ocasião</span>
+          <h2>Conte o essencial para o MAESTTRO começar certo.</h2>
+          <p>Categoria, data e local alimentam a próxima etapa. Assim o cliente não responde a mesma coisa duas vezes.</p>
+        </div>
+        <form id="lead-form" class="lead-form">
+          <label>Nome<input id="lead-name" required placeholder="Nome completo" /></label>
+          <label>E-mail<input id="lead-email" type="email" required placeholder="email@exemplo.com" /></label>
+          <label>Telefone<input id="lead-phone" required placeholder="(11) 99999-9999" /></label>
+          <label>Tipo de evento
+            <select id="lead-event-type" required>
+              <option>Casamento</option>
+              <option>Debutante</option>
+              <option>Bodas</option>
+              <option>Aniversário</option>
+              <option>Corporativo</option>
+              <option>Tributo / Fúnebre</option>
+              <option>Pedido de casamento</option>
+              <option>Outro</option>
+            </select>
+          </label>
+          <label>Data do evento
+            <input id="lead-event-date" type="date" required />
+            <small id="lead-date-status" class="date-status" aria-live="polite">A agenda será conferida automaticamente.</small>
+          </label>
+          <label>Local do evento<input id="lead-location" required placeholder="Nome do espaço, cidade ou endereço" /></label>
+          <label>CEP do evento<input id="lead-zip" placeholder="Opcional, ajuda no deslocamento" /></label>
+          <label>Faixa desejada de investimento
+            <select id="lead-budget">
+              <option>A definir</option>
+              <option>Até R$ 3.000</option>
+              <option>R$ 3.000 a R$ 6.000</option>
+              <option>R$ 6.000 a R$ 10.000</option>
+              <option>Acima de R$ 10.000</option>
+            </select>
+          </label>
+          <label class="lead-consent"><input id="lead-consent" type="checkbox" checked /> Aceito receber contato do Quartetto Serenatta sobre minha simulação.</label>
+          <button class="primary" type="submit">Continuar para o MAESTTRO</button>
+        </form>
+        <div id="lead-success" class="lead-success" hidden></div>
+      </section>
+
+      <section id="maesttro" class="concierge locked-section locked hidden-until-ready" data-after-lead>
+        <div class="section-title">
+          <span>MAESTTRO</span>
+          <h2>Agora ajuste a experiência com perguntas simples.</h2>
+        </div>
+
+        <div class="question-grid">
+          <article class="question-card lead-context-card" data-question="leadContext">
+            <span>00</span>
+            <h3 id="lead-context-title">Dados recebidos</h3>
+            <p id="lead-context-copy">A categoria, data e local informados acima orientam as próximas perguntas.</p>
+            <div id="lead-context-tags" class="context-tags"></div>
+          </article>
+          <article class="question-card" data-question="venue" data-dynamic-question="venue">
+            <span>01</span>
+            <h3>Onde será o evento?</h3>
+            <div class="option-row">
+              <button data-answer="venue" data-value="fechado">Local fechado</button>
+              <button data-answer="venue" data-value="ar livre">Ao ar livre</button>
+              <button data-answer="venue" data-value="praia/campo">Praia ou campo</button>
+            </div>
+          </article>
+
+          <article class="question-card" data-question="style" data-dynamic-question="style">
+            <span>02</span>
+            <h3>Qual é a personalidade visual?</h3>
+            <div class="option-row">
+              <button data-answer="style" data-value="minimalista">Minimalista</button>
+              <button data-answer="style" data-value="romântico">Romântico</button>
+              <button data-answer="style" data-value="marcante">Chamativo</button>
+            </div>
+          </article>
+
+          <article class="question-card" data-question="rite" data-dynamic-question="rite">
+            <span>03</span>
+            <h3 id="rite-question-title">Qual é o rito ou contexto?</h3>
+            <div class="option-row" id="rite-options"></div>
+          </article>
+
+          <article class="question-card" data-question="eventMoment" data-dynamic-question="eventMoment" hidden>
+            <span>03</span>
+            <h3 id="event-moment-title">Em quais momentos teremos música?</h3>
+            <div class="option-row" id="event-moment-options"></div>
+          </article>
+
+          <article class="question-card" data-question="durationMinutes" data-dynamic-question="duration" hidden>
+            <span>04</span>
+            <h3 id="duration-question-title">Qual será a duração?</h3>
+            <div class="option-row" id="duration-options"></div>
+          </article>
+
+          <article class="question-card" data-question="musicalStyle" data-dynamic-question="musicalStyle" hidden>
+            <span>05</span>
+            <h3>Qual estilo musical combina com o evento?</h3>
+            <div class="option-row">
+              <button data-answer="musicalStyle" data-value="clássico">Clássico</button>
+              <button data-answer="musicalStyle" data-value="romântico">Romântico</button>
+              <button data-answer="musicalStyle" data-value="pop internacional">Pop internacional</button>
+              <button data-answer="musicalStyle" data-value="mpb">MPB</button>
+              <button data-answer="musicalStyle" data-value="lounge">Lounge</button>
+              <button data-answer="musicalStyle" data-value="sacro">Sacro</button>
+            </div>
+          </article>
+
+          <article class="question-card" data-question="emotion" data-dynamic-question="emotion">
+            <span>04</span>
+            <h3>O que vocês querem provocar?</h3>
+            <div class="option-row">
+              <button data-answer="emotion" data-value="lágrimas">Lágrimas</button>
+              <button data-answer="emotion" data-value="leveza">Leveza</button>
+              <button data-answer="emotion" data-value="aplausos">Aplausos</button>
+              <button data-answer="emotion" data-value="surpresa">Surpresa</button>
+            </div>
+          </article>
+
+          <article class="question-card wide" data-question="story" data-dynamic-question="story">
+            <span>05</span>
+            <h3 id="story-question-title">Existe uma música da história do evento?</h3>
+            <div class="story-input">
+              <input id="story-song" placeholder="Ex.: música do casal, da família, da marca ou da homenagem..." />
+              <button id="fit-story-song">Encaixar no roteiro</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="escolhas" class="choices-section locked-section locked hidden-until-ready" data-after-lead>
+        <div class="section-title">
+          <span>Sua montagem musical</span>
+          <h2>Ajuste formação, referências e repertório com clareza.</h2>
+          <p>O MAESTTRO parte dos dados do evento e deixa o cliente refinar músicos, duração, estilo e músicas importantes.</p>
+        </div>
+        <div class="choices-layout">
+          <div>
+            <div class="choice-heading">
+              <h3>Músicos e formações</h3>
+              <span id="instrument-choice-count"></span>
+            </div>
+            <div class="choice-grid" id="instrument-choice-grid"></div>
+          </div>
+          <aside class="choice-summary">
+            <span>Resumo das escolhas</span>
+            <strong id="choice-total">R$ 0,00</strong>
+            <p id="choice-summary-copy">Cadastre o evento para liberar recomendações e escolhas.</p>
+            <a class="primary" href="#set">Ver roteiro musical</a>
+            <a class="soft contract-link" href="./contrato.html">Dados para contrato</a>
+          </aside>
+          <div class="music-choice-area">
+            <div class="choice-heading">
+              <h3 id="music-choice-title">Músicas sugeridas</h3>
+              <span id="music-choice-subtitle">Editável por momento</span>
+            </div>
+            <div class="music-choice-grid" id="music-choice-grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="vitrine" class="stream-section hidden-until-ready" data-after-lead>
+        <div class="section-title stream-title">
+          <span>Inspirações</span>
+          <h2>Navegue por cenas, formações, climas e momentos.</h2>
+        </div>
+        <div class="stream-rail" id="service-rail"></div>
+      </section>
+
+      <section id="set" class="set-section hidden-until-ready" data-after-lead>
+        <div class="set-intro">
+          <span>Roteiro musical</span>
+          <h2 id="set-title">Romance clássico com assinatura cinematográfica.</h2>
+          <p id="set-description">Uma formação elegante para cerimônia com emoção crescente, rito respeitado e saída memorável.</p>
+        </div>
+
+        <aside class="set-summary">
+          <span>Formação sugerida</span>
+          <strong id="formation-name">Quarteto de cordas + piano leve</strong>
+          <p id="formation-reason">Ideal para local fechado, entrada imponente e repertório com textura emocional.</p>
+          <a class="primary" href="#contratar">Gostei dessa direção</a>
+        </aside>
+
+        <div class="timeline" id="timeline"></div>
+      </section>
+
+      <section id="previas" class="preview-section">
+        <div class="section-title stream-title">
+          <span>Veja antes de escolher</span>
+          <h2>Prévias por formação, música e clima de cerimônia.</h2>
+        </div>
+        <div class="preview-layout">
+          <div class="preview-hero" id="preview-hero"></div>
+          <div class="preview-list" id="preview-list"></div>
+        </div>
+      </section>
+
+      <section id="spotify" class="spotify-section">
+        <div>
+          <span>Playlist afetiva</span>
+          <h2 id="spotify-title">Traga o Spotify. O MAESTTRO sugere onde cada música cabe melhor.</h2>
+          <p id="spotify-copy">Cole um link de playlist ou escreva algumas músicas. A lógica do protótipo simula a curadoria por energia, letra, função emocional e momento da cerimônia.</p>
+        </div>
+        <div class="spotify-box">
+          <label>
+            Link da playlist Spotify
+            <input id="spotify-link" placeholder="https://open.spotify.com/playlist/..." />
+          </label>
+          <label>
+            Músicas importantes para a história do evento
+            <textarea id="spotify-songs" placeholder="Yellow - Coldplay&#10;Perfect - Ed Sheeran&#10;A Thousand Years - Christina Perri"></textarea>
+          </label>
+          <button id="analyze-spotify" class="primary">Sugerir encaixes</button>
+          <div id="spotify-result" class="spotify-result"></div>
+        </div>
+      </section>
+
+      <section id="deslocamento" class="travel-section">
+        <div class="section-title">
+          <span>Logística transparente</span>
+          <h2>Deslocamento por distância, pedágio e quantidade de veículos.</h2>
+          <p>Informe o CEP para estimarmos deslocamento, veículos e possíveis pedágios de forma automática.</p>
+        </div>
+        <div class="travel-grid">
+          <article class="travel-card">
+            <h3>Origem fixa</h3>
+            <p>Paço Municipal de São Bernardo do Campo/SP - CEP 09750-700</p>
+            <label>CEP do evento<input id="travel-zip" placeholder="Ex.: 01310-100" /></label>
+            <label class="checkline"><input id="round-trip" type="checkbox" checked /> considerar ida e volta</label>
+            <button id="calculate-travel" class="primary">Calcular deslocamento</button>
+          </article>
+          <article class="travel-card">
+            <h3>Variáveis de transporte</h3>
+            <div class="instrument-pills" id="transport-instruments"></div>
+            <label class="checkline"><input id="complete-sound" type="checkbox" /> estrutura de som completa</label>
+          </article>
+          <article class="travel-result" id="travel-result"></article>
+        </div>
+      </section>
+
+      <section id="contratar" class="checkout-preview">
+        <div>
+          <span>Próximos passos</span>
+          <h2>Depois da escolha, tudo fica claro.</h2>
+          <p>Data disponível, deslocamento, formação, repertório, estrutura técnica e continuidade em uma jornada única.</p>
+        </div>
+        <div class="checkout-card">
+          <strong id="total-price">R$ 4.800,00</strong>
+          <span>Estimativa inicial</span>
+          <ul>
+            <li>Dados do evento salvos</li>
+            <li>Condições de continuidade definidas</li>
+            <li>Agenda com datas bloqueadas</li>
+            <li>Roteiro musical editável até aprovação</li>
+          </ul>
+          <a class="primary" href="./contrato.html">Preencher dados para contrato</a>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="moment-dialog">
+      <button id="close-dialog" class="dialog-close">Fechar</button>
+      <img id="dialog-image" src="./assets/music-details.png" alt="" />
+      <div>
+        <span id="dialog-moment"></span>
+        <h2 id="dialog-title"></h2>
+        <p id="dialog-copy"></p>
+        <div id="dialog-tags" class="dialog-tags"></div>
+        <button id="dialog-play" class="primary">Ouvir trecho MIDI</button>
+      </div>
+    </dialog>
+
+    <script>
+const storageKeys = {
+  blockedDates: "maesttro-blocked-dates",
+  contractContext: "maesttro-contract-context",
+  homeContent: "maesttro-home-content",
+  previewVideos: "maesttro-preview-videos",
+  serviceCards: "maesttro-service-cards"
+};
+
+function readStorage(key, fallback) {
+  try {
+    return JSON.parse(localStorage.getItem(key)) || fallback;
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function writeStorage(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    // The prototype still works when browser storage is unavailable.
+  }
+}
+
+const state = {
+  eventKind: "casamento",
+  venue: "fechado",
+  style: "romântico",
+  rite: "cristão",
+  emotion: "lágrimas",
+  eventMoment: "todos",
+  durationMinutes: "60",
+  musicalStyle: "romântico",
+  storySong: "",
+  transportSelection: ["Violino I", "Violino II", "Violoncelo", "Piano"],
+  completeSound: false,
+  categories: ["Cordas", "Sopros", "Vozes", "Teclas", "Estrutura", "Recepção"],
+  midiFileName: "",
+  videoFileName: "",
+  videoObjectUrl: "",
+  imageUploadDataUrl: "",
+  videoThumbDataUrl: "",
+  videoEditId: null,
+  homeCardEditIndex: null,
+  selectedInstrumentIds: ["violino-1", "violino-2", "violoncelo", "piano"],
+  blockedDates: readStorage(storageKeys.blockedDates, []),
+  lead: null
+};
+
+const money = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+
+const instruments = [
+  { id: "violino-1", name: "Violino I", category: "Cordas", price: 800, heavy: false },
+  { id: "violino-2", name: "Violino II", category: "Cordas", price: 800, heavy: false },
+  { id: "violoncelo", name: "Violoncelo", category: "Cordas", price: 900, heavy: true },
+  { id: "piano", name: "Piano/Teclado", category: "Teclas", price: 1000, heavy: false },
+  { id: "sax", name: "Saxofone", category: "Sopros", price: 900, heavy: false },
+  { id: "contrabaixo", name: "Contrabaixo acústico", category: "Cordas", price: 900, heavy: true },
+  { id: "voz", name: "Voz solista", category: "Vozes", price: 850, heavy: false }
+];
+
+const defaultPreviewVideos = [
+  {
+    id: "previa-canon-quarteto",
+    title: "Canon in D com quarteto",
+    formation: "Quarteto de cordas",
+    music: "Canon in D",
+    image: "./assets/ceremony-garden.png",
+    description: "Exemplo de entrada da noiva com progressão clássica e visual de cerimônia elegante."
+  },
+  {
+    id: "previa-sax-recepcao",
+    title: "Sax e teclado na recepção",
+    formation: "Sax + teclado",
+    music: "Fly Me to the Moon",
+    image: "./assets/celebration-light.png",
+    description: "Demonstração para recepção, coquetel e jantar com clima lounge."
+  },
+  {
+    id: "previa-voz-piano",
+    title: "Voz e piano para votos",
+    formation: "Voz feminina + piano",
+    music: "A Thousand Years",
+    image: "./assets/music-details.png",
+    description: "Exemplo de momento emocional, votos e homenagens."
+  }
+];
+
+const previewVideos = readStorage(storageKeys.previewVideos, defaultPreviewVideos);
+
+const defaultServiceCards = [
+  { title: "Casamento", tag: "Cerimônia e recepção", image: "./assets/ceremony-garden.png", copy: "Entradas, rito, assinaturas, cumprimentos e saída com repertório afetivo." },
+  { title: "Debutante", tag: "15 anos", image: "./assets/celebration-light.png", copy: "Entrada, valsa, homenagens e recepção com formação elegante." },
+  { title: "Bodas", tag: "História da família", image: "./assets/music-details.png", copy: "Releituras afetivas e momentos de homenagem para celebrar uma trajetória." },
+  { title: "Aniversário", tag: "Celebração social", image: "./assets/celebration-light.png", copy: "Sets por clima: recepção, parabéns, jantar e pista leve." },
+  { title: "Corporativo", tag: "Marca e experiência", image: "./assets/ceremony-garden.png", copy: "Soluções para abertura, networking, premiações e encerramento." },
+  { title: "Pedido de casamento", tag: "Momento surpresa", image: "./assets/ceremony-garden.png", copy: "Execução curta, precisa e emocionante para tornar o pedido inesquecível." },
+  { title: "Tributo / Fúnebre", tag: "Acolhimento", image: "./assets/music-details.png", copy: "Repertório respeitoso para homenagens, despedidas e celebrações de vida." }
+];
+
+const serviceCards = readStorage(storageKeys.serviceCards, defaultServiceCards);
+
+const defaultHomeContent = {
+  heroImage: "./assets/capa-quartetto-serenatta.jpeg",
+  categoryImages: {
+    casamento: "./assets/ceremony-garden.png",
+    debutante: "./assets/celebration-light.png",
+    bodas: "./assets/music-details.png"
+  },
+  previewBackground: "./assets/celebration-light.png"
+};
+
+const storedHomeContent = readStorage(storageKeys.homeContent, defaultHomeContent);
+const homeContent = {
+  ...defaultHomeContent,
+  ...storedHomeContent,
+  categoryImages: {
+    ...defaultHomeContent.categoryImages,
+    ...(storedHomeContent.categoryImages || {})
+  }
+};
+
+const eventFlow = {
+  casamento: {
+    show: ["venue", "style", "rite", "emotion", "story"],
+    riteTitle: "Qual é o rito da cerimônia?",
+    riteOptions: [
+      ["cristão", "Cristão"],
+      ["católico", "Católico"],
+      ["civil", "Civil / simbólico"],
+      ["laico", "Laico"],
+      ["espírita", "Espírita"]
+    ],
+    storyTitle: "Existe uma música da história do casal?",
+    musicMode: "ceremony"
+  },
+  debutante: {
+    show: ["eventMoment", "duration", "musicalStyle", "story"],
+    momentTitle: "Quais momentos da festa terão música?",
+    momentOptions: [
+      ["recepção", "Recepção dos convidados"],
+      ["valsa", "Valsa da debutante"],
+      ["jantar", "Jantar"],
+      ["todos", "Todos"]
+    ],
+    durationTitle: "Qual será a duração da execução?",
+    durationOptions: [
+      ["60", "60 minutos"],
+      ["120", "120 minutos"],
+      ["180", "180 minutos"]
+    ],
+    storyTitle: "Quais músicas a debutante gostaria de ouvir?",
+    musicMode: "briefing"
+  },
+  corporativo: {
+    show: ["eventMoment", "musicalStyle", "story"],
+    momentTitle: "Quais momentos corporativos terão música?",
+    momentOptions: [
+      ["recepção", "Recepção dos convidados"],
+      ["intervalo", "Intervalo"],
+      ["jantar", "Jantar"],
+      ["todos", "Tudo"]
+    ],
+    storyTitle: "Existe alguma música, tema da marca ou restrição de repertório?",
+    musicMode: "briefing"
+  },
+  pedido: {
+    show: ["venue", "duration", "musicalStyle", "story"],
+    durationTitle: "Qual será o tempo de execução?",
+    durationOptions: [
+      ["15", "Até 15 minutos"],
+      ["30", "Até 30 minutos"],
+      ["60", "Até 60 minutos"]
+    ],
+    storyTitle: "Qual música faz parte da história do casal?",
+    musicMode: "briefing"
+  },
+  tributo: {
+    show: ["rite", "musicalStyle", "story"],
+    riteTitle: "Qual é o rito do tributo?",
+    riteOptions: [
+      ["católico", "Católico"],
+      ["cristão", "Cristão"],
+      ["espírita", "Espírita"],
+      ["laico", "Laico"]
+    ],
+    storyTitle: "Quais músicas ou homenagens devem ser consideradas?",
+    musicMode: "briefing"
+  },
+  default: {
+    show: ["musicalStyle", "story"],
+    storyTitle: "Quais músicas ou estilos você gostaria de indicar?",
+    musicMode: "briefing"
+  }
+};
+
+const eventPresets = {
+  casamento: {
+    formation: "Quarteto de cordas + piano leve",
+    title: "Romance clássico com assinatura cinematográfica.",
+    description: "Uma formação elegante para cerimônia com emoção crescente, rito respeitado e saída memorável.",
+    moments: ["Pré-cerimônia", "Entrada dos padrinhos", "Entrada do noivo", "Entrada da noiva", "Rito / oração / assinaturas", "Saída dos noivos"],
+    reason: "Ideal para entradas, rito e saída com repertório afetivo."
+  },
+  debutante: {
+    formation: "Violino + piano + voz + sax na recepção",
+    title: "Uma estreia com brilho, afeto e presença.",
+    description: "Set pensado para recepção, valsa, jantar ou festa completa, com duração escolhida pelo cliente.",
+    moments: ["Recepção dos convidados", "Valsa da debutante", "Jantar"],
+    reason: "Equilibra cerimônia social, emoção familiar e celebração."
+  },
+  bodas: {
+    formation: "Duo de cordas + voz especial",
+    title: "A trilha de uma história que continua.",
+    description: "Repertório afetivo para celebrar trajetória, família e votos renovados.",
+    moments: ["Recepção da família", "Entrada do casal", "Renovação de votos", "Homenagem dos filhos", "Brinde", "Encerramento"],
+    reason: "Valoriza memória e intimidade sem excesso."
+  },
+  aniversário: {
+    formation: "Sax + teclado + voz",
+    title: "Celebração leve, elegante e com energia crescente.",
+    description: "Uma jornada para receber, brindar, cantar parabéns e abrir o clima da festa.",
+    moments: ["Recepção", "Jantar/coquetel", "Homenagem", "Parabéns", "Brinde", "Pista leve"],
+    reason: "Funciona para aniversário adulto com sofisticação e repertório versátil."
+  },
+  corporativo: {
+    formation: "Sax + teclado + técnico de som",
+    title: "Som de marca: elegante, objetivo e memorável.",
+    description: "Música para abertura, networking, premiação e encerramento sem disputar atenção.",
+    moments: ["Recepção dos convidados", "Intervalo", "Jantar"],
+    reason: "Entrega atmosfera premium sem atrapalhar fala, marca e relacionamento."
+  },
+  pedido: {
+    formation: "Violino solo ou duo romântico",
+    title: "O pedido entra no tempo certo, sem excesso.",
+    description: "Execução planejada para o momento surpresa, com música afetiva e duração objetiva.",
+    moments: ["Chegada", "Pedido", "Brinde / fotos"],
+    reason: "Foco em impacto emocional, discrição e execução precisa."
+  },
+  tributo: {
+    formation: "Violoncelo + piano + voz serena",
+    title: "Acolhimento musical para homenagens delicadas.",
+    description: "Repertório respeitoso para despedidas, tributos e celebrações de vida.",
+    moments: ["Acolhimento", "Entrada da família", "Momento de reflexão", "Homenagem", "Oração/leitura", "Despedida"],
+    reason: "Prioriza conforto, sobriedade e presença emocional."
+  }
+};
+
+const baseMoments = [
+  {
+    id: "preludio",
+    moment: "Pré-cerimônia",
+    title: "Clair de Lune",
+    artist: "Debussy",
+    copy: "Recebe os convidados com uma atmosfera calma, refinada e sensorial, sem roubar o protagonismo da entrada.",
+    image: "./assets/music-details.png",
+    tags: ["Acolhimento", "Instrumental", "Elegante"],
+    notes: [523.25, 587.33, 659.25, 587.33, 523.25]
+  },
+  {
+    id: "padrinhos",
+    moment: "Entrada dos padrinhos",
+    title: "Perfect",
+    artist: "Ed Sheeran",
+    copy: "Popular, reconhecível e afetiva. Funciona bem para abrir a cerimônia com leveza e sorriso.",
+    image: "./assets/ceremony-garden.png",
+    tags: ["Popular", "Leve", "Afetiva"],
+    notes: [329.63, 392, 493.88, 440, 392]
+  },
+  {
+    id: "noivo",
+    moment: "Entrada do noivo",
+    title: "A Thousand Years",
+    artist: "Christina Perri",
+    copy: "Cria uma entrada emocional sem competir com o ápice da noiva. Boa para casais românticos.",
+    image: "./assets/ceremony-garden.png",
+    tags: ["Romântica", "Crescente", "Emocional"],
+    notes: [440, 493.88, 523.25, 659.25, 587.33]
+  },
+  {
+    id: "noiva",
+    moment: "Entrada da noiva",
+    title: "Canon in D",
+    artist: "Pachelbel",
+    copy: "Entrada atemporal, com progressão nobre e senso de chegada. É segura, elegante e cinematográfica.",
+    image: "./assets/ceremony-garden.png",
+    tags: ["Clássica", "Imponente", "Segura"],
+    notes: [587.33, 440, 493.88, 369.99, 392, 293.66]
+  },
+  {
+    id: "rito",
+    moment: "Rito / oração / assinaturas",
+    title: "Ave Maria",
+    artist: "Schubert",
+    copy: "Momento contemplativo, especialmente adequado para cerimônias católicas ou cristãs com pausa devocional.",
+    image: "./assets/music-details.png",
+    tags: ["Sacra", "Respeitosa", "Contemplativa"],
+    notes: [523.25, 587.33, 659.25, 783.99, 739.99]
+  },
+  {
+    id: "saida",
+    moment: "Saída dos noivos",
+    title: "Viva La Vida",
+    artist: "Coldplay",
+    copy: "A saída pede celebração. Aqui a música abre a energia da festa sem perder sofisticação.",
+    image: "./assets/celebration-light.png",
+    tags: ["Celebrativa", "Moderna", "Aplausos"],
+    notes: [523.25, 587.33, 659.25, 392, 523.25]
+  }
+];
+
+const recommendations = {
+  minimalista: {
+    formation: "Duo violino + violoncelo",
+    reason: "Poucos músicos, muita presença. Ideal para cerimônias intimistas e estética limpa.",
+    title: "Elegância íntima, sem excesso.",
+    description: "Um set delicado, com entradas suaves e arranjos que respeitam o silêncio do momento."
+  },
+  romântico: {
+    formation: "Quarteto de cordas + piano leve",
+    reason: "A formação cria profundidade emocional e sustenta entradas com progressão cinematográfica.",
+    title: "Romance clássico com assinatura cinematográfica.",
+    description: "Uma formação elegante para cerimônia com emoção crescente, rito respeitado e saída memorável."
+  },
+  marcante: {
+    formation: "Cordas + voz + sax na saída",
+    reason: "Começa nobre, ganha voz nos pontos afetivos e termina com celebração moderna.",
+    title: "Uma cerimônia com ápice, surpresa e aplauso.",
+    description: "Para casais que querem emocionar e também serem lembrados pela experiência."
+  }
+};
+
+function currentRecommendation() {
+  const eventPreset = eventPresets[state.eventKind] || eventPresets.casamento;
+  const rec = recommendations[state.style] || recommendations.romântico;
+  if (state.eventKind !== "casamento") {
+    const durationCopy = state.eventKind === "debutante"
+      ? ` Duração selecionada: ${state.durationMinutes} minutos, com cobrança por bloco de 60 minutos.`
+      : state.eventKind === "pedido"
+        ? ` Tempo de execução selecionado: ${state.durationMinutes} minutos.`
+        : "";
+    return {
+      ...rec,
+      formation: eventPreset.formation,
+      title: eventPreset.title,
+      description: `${eventPreset.description}${durationCopy}`,
+      reason: `${eventPreset.reason} Estilo musical preferido: ${state.musicalStyle}.`
+    };
+  }
+  if (state.venue === "ar livre" && state.style !== "marcante") {
+    return {
+      ...rec,
+      formation: rec.formation.replace("piano leve", "teclado elegante"),
+      reason: `${rec.reason} Em local aberto, teclado elegante traz estabilidade e melhor projeção.`
+    };
+  }
+  if (state.rite === "católico") {
+    return {
+      ...rec,
+      reason: `${rec.reason} Para rito católico, o set preserva momentos sacros e evita escolhas inadequadas durante o rito.`
+    };
+  }
+  return rec;
+}
+
+function flowConfig() {
+  return eventFlow[state.eventKind] || eventFlow.default;
+}
+
+function priceMultiplier() {
+  if (state.eventKind !== "debutante") return 1;
+  return Math.max(1, Math.ceil(Number(state.durationMinutes || 60) / 60));
+}
+
+function selectedMomentLabels() {
+  const preset = eventPresets[state.eventKind] || eventPresets.casamento;
+  if (state.eventKind === "debutante") {
+    const labels = {
+      recepção: ["Recepção dos convidados"],
+      valsa: ["Valsa da debutante"],
+      jantar: ["Jantar"],
+      todos: ["Recepção dos convidados", "Valsa da debutante", "Jantar"]
+    };
+    return labels[state.eventMoment] || preset.moments;
+  }
+  if (state.eventKind === "corporativo") {
+    const labels = {
+      recepção: ["Recepção dos convidados"],
+      intervalo: ["Intervalo"],
+      jantar: ["Jantar"],
+      todos: ["Recepção dos convidados", "Intervalo", "Jantar"]
+    };
+    return labels[state.eventMoment] || preset.moments;
+  }
+  return preset.moments;
+}
+
+const homeImageLabels = {
+  heroImage: "Capa principal",
+  casamento: "Categoria Casamento",
+  debutante: "Categoria Debutante",
+  bodas: "Categoria Bodas",
+  previewBackground: "Fundo das prévias"
+};
+
+function persistVisualContent() {
+  writeStorage(storageKeys.homeContent, homeContent);
+  writeStorage(storageKeys.previewVideos, previewVideos);
+  writeStorage(storageKeys.serviceCards, serviceCards);
+}
+
+function safeCssUrl(value) {
+  return String(value || "").replace(/"/g, "%22");
+}
+
+function applyHomeContent() {
+  const heroImage = document.getElementById("hero-cover-image");
+  if (heroImage) heroImage.src = homeContent.heroImage;
+  document.querySelectorAll("[data-home-image]").forEach((image) => {
+    const slot = image.dataset.homeImage;
+    image.src = homeContent.categoryImages[slot] || image.src;
+  });
+  const previewSection = document.getElementById("previas");
+  if (previewSection) {
+    previewSection.style.backgroundImage = `linear-gradient(180deg, rgba(47, 51, 50, 0.96), rgba(47, 51, 50, 0.9)), url("${safeCssUrl(homeContent.previewBackground)}")`;
+  }
+}
+
+function readImageFile(file, onReady) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.addEventListener("load", () => onReady(reader.result));
+  reader.readAsDataURL(file);
+}
+
+function updateHomeCardButton() {
+  const button = document.getElementById("save-home-card");
+  const cancelButton = document.getElementById("cancel-home-card-edit");
+  if (button) button.textContent = state.homeCardEditIndex === null ? "Adicionar card" : "Salvar card";
+  if (cancelButton) cancelButton.hidden = state.homeCardEditIndex === null;
+}
+
+function resetHomeCardForm() {
+  ["admin-card-title", "admin-card-tag", "admin-card-copy", "admin-card-image"].forEach((id) => {
+    const field = document.getElementById(id);
+    if (field) field.value = "";
+  });
+  state.homeCardEditIndex = null;
+  updateHomeCardButton();
+}
+
+function fillHomeCardForm(index) {
+  const item = serviceCards[index];
+  if (!item) return;
+  state.homeCardEditIndex = index;
+  document.getElementById("admin-card-title").value = item.title || "";
+  document.getElementById("admin-card-tag").value = item.tag || "";
+  document.getElementById("admin-card-copy").value = item.copy || "";
+  document.getElementById("admin-card-image").value = item.image || "";
+  updateHomeCardButton();
+}
+
+function updateVideoButton() {
+  const button = document.getElementById("add-admin-video");
+  const cancelButton = document.getElementById("cancel-video-edit");
+  if (button) button.textContent = state.videoEditId ? "Salvar vídeo" : "Adicionar vídeo";
+  if (cancelButton) cancelButton.hidden = !state.videoEditId;
+}
+
+function resetVideoForm() {
+  ["admin-video-title", "admin-video-formation", "admin-video-music", "admin-video-url", "admin-video-image", "admin-video-description"].forEach((id) => {
+    const field = document.getElementById(id);
+    if (field) field.value = "";
+  });
+  state.videoFileName = "";
+  state.videoObjectUrl = "";
+  state.videoThumbDataUrl = "";
+  state.videoEditId = null;
+  const videoFile = document.getElementById("admin-video-file");
+  const thumbFile = document.getElementById("admin-video-thumb-file");
+  if (videoFile) videoFile.value = "";
+  if (thumbFile) thumbFile.value = "";
+  updateVideoButton();
+}
+
+function fillVideoForm(id) {
+  const item = previewVideos.find((video) => video.id === id);
+  if (!item) return;
+  state.videoEditId = id;
+  document.getElementById("admin-video-title").value = item.title || "";
+  document.getElementById("admin-video-formation").value = item.formation || "";
+  document.getElementById("admin-video-music").value = item.music || "";
+  document.getElementById("admin-video-url").value = item.videoUrl || "";
+  document.getElementById("admin-video-image").value = item.image || "";
+  document.getElementById("admin-video-description").value = item.description || "";
+  updateVideoButton();
+}
+
+function renderServiceRail() {
+  const rail = document.getElementById("service-rail");
+  if (!rail) return;
+  rail.innerHTML = serviceCards.map((item) => `
+    <article class="stream-card">
+      <img src="${item.image}" alt="${item.title}">
+      <div>
+        <span>${item.tag}</span>
+        <h3>${item.title}</h3>
+        <p>${item.copy}</p>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderPreviewVideos(activeId = previewVideos[0]?.id) {
+  const active = previewVideos.find((item) => item.id === activeId) || previewVideos[0];
+  const hero = document.getElementById("preview-hero");
+  const list = document.getElementById("preview-list");
+  if (!hero || !list) return;
+  if (!active) {
+    hero.innerHTML = `<article class="preview-main empty-preview"><div class="preview-main-content"><span>Prévias</span><h3>Nenhum vídeo cadastrado.</h3><p>Use o ADMIN para incluir demonstrações por formação, música e clima de evento.</p></div></article>`;
+    list.innerHTML = "";
+    return;
+  }
+  hero.innerHTML = `
+    <article class="preview-main">
+      <img src="${active.image}" alt="${active.title}">
+      <div class="preview-main-content">
+        <span>${active.formation}</span>
+        <h3>${active.title}</h3>
+        <p>${active.description}</p>
+        <button class="primary" data-video-play="${active.id}">Assistir prévia</button>
+      </div>
+    </article>
+  `;
+  list.innerHTML = previewVideos.map((item) => `
+    <article class="preview-thumb" data-video="${item.id}">
+      <img src="${item.image}" alt="${item.title}">
+      <div><strong>${item.title}</strong><span>${item.formation} • ${item.music}</span></div>
+      <span class="play-dot">▶</span>
+    </article>
+  `).join("");
+  document.querySelectorAll("[data-video]").forEach((item) => {
+    item.addEventListener("click", () => renderPreviewVideos(item.dataset.video));
+  });
+  document.querySelectorAll("[data-video-play]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const item = previewVideos.find((video) => video.id === button.dataset.videoPlay);
+      if (item?.videoUrl) {
+        window.open(item.videoUrl, "_blank", "noopener");
+        return;
+      }
+      alert(`Prévia "${item.title}" cadastrada. No produto final, o vídeo abre em player próprio com arquivo/URL salvo pelo admin.`);
+    });
+  });
+}
+
+function renderTransportInstruments() {
+  const wrap = document.getElementById("transport-instruments");
+  if (!wrap) return;
+  wrap.innerHTML = instruments.map((item) => `
+    <button class="${state.transportSelection.includes(item.name) ? "active" : ""}" data-transport="${item.name}">
+      ${item.name}${item.heavy ? " • grande" : ""}
+    </button>
+  `).join("");
+  document.querySelectorAll("[data-transport]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const name = button.dataset.transport;
+      state.transportSelection = state.transportSelection.includes(name)
+        ? state.transportSelection.filter((item) => item !== name)
+        : [...state.transportSelection, name];
+      renderTransportInstruments();
+      calculateTravel();
+    });
+  });
+}
+
+function estimateDistanceFromZip(zipCode) {
+  const digits = String(zipCode || "").replace(/\D/g, "");
+  if (!digits) return 0;
+  if (digits.startsWith("09")) return 18;
+  if (digits.startsWith("01") || digits.startsWith("04") || digits.startsWith("05")) return 34;
+  if (digits.startsWith("11")) return 78;
+  if (digits.startsWith("13")) return 92;
+  if (digits.startsWith("12")) return 128;
+  return 52;
+}
+
+function estimateTollPerVehicleFromZip(zipCode, distanceOneWay) {
+  const digits = String(zipCode || "").replace(/\D/g, "");
+  if (!digits || !distanceOneWay) return 0;
+  if (digits.startsWith("09")) return 0;
+  if (digits.startsWith("01") || digits.startsWith("04") || digits.startsWith("05")) return 0;
+  if (digits.startsWith("11")) return 18.4;
+  if (digits.startsWith("13")) return 32.8;
+  if (digits.startsWith("12")) return 42.5;
+  return distanceOneWay > 70 ? 24 : 0;
+}
+
+function calculateTransportPlan() {
+  const selected = instruments.filter((item) => state.transportSelection.includes(item.name));
+  const hasHeavy = selected.some((item) => item.heavy) || state.completeSound;
+  const people = Math.max(selected.length, 1);
+  const capacity = hasHeavy ? 2 : 4;
+  const vehicles = Math.max(Math.ceil(people / capacity), state.completeSound ? 1 : 1);
+  return { selected, hasHeavy, people, capacity, vehicles };
+}
+
+function calculateTravel() {
+  const zip = document.getElementById("travel-zip")?.value || "";
+  const roundTrip = Boolean(document.getElementById("round-trip")?.checked);
+  const distanceOneWay = estimateDistanceFromZip(zip);
+  const tollPerVehicle = estimateTollPerVehicleFromZip(zip, distanceOneWay);
+  const distanceCharged = roundTrip ? distanceOneWay * 2 : distanceOneWay;
+  const blocks = Math.ceil(distanceCharged / 10);
+  const transport = calculateTransportPlan();
+  const kmCostPerVehicle = blocks * 6.5;
+  const totalTolls = tollPerVehicle * transport.vehicles * (roundTrip ? 2 : 1);
+  const travelTotal = (kmCostPerVehicle * transport.vehicles) + totalTolls;
+  const result = document.getElementById("travel-result");
+  if (!result) return;
+  result.innerHTML = `
+    <span>Resultado logístico</span>
+    <strong>${money.format(travelTotal)}</strong>
+    <div class="travel-line"><span>Distância estimada</span><b>${distanceOneWay || "--"} km ${roundTrip ? "por trecho" : ""}</b></div>
+    <div class="travel-line"><span>Distância cobrada</span><b>${distanceCharged || "--"} km</b></div>
+    <div class="travel-line"><span>Blocos de 10 km</span><b>${blocks || "--"}</b></div>
+    <div class="travel-line"><span>Capacidade por carro</span><b>${transport.capacity} pessoas</b></div>
+    <div class="travel-line"><span>Veículos sugeridos</span><b>${transport.vehicles}</b></div>
+    <div class="travel-line"><span>Pedágios estimados</span><b>${money.format(totalTolls)}</b></div>
+    <small>${zip ? "Estimativa automática a partir do CEP informado." : "Informe o CEP do evento para calcular a estimativa."}</small>
+  `;
+}
+
+function renderVisualAdmin() {
+  const imageList = document.getElementById("home-image-admin-list");
+  const cardList = document.getElementById("home-card-admin-list");
+  if (imageList) {
+    const imageItems = [
+      ["heroImage", homeContent.heroImage],
+      ["casamento", homeContent.categoryImages.casamento],
+      ["debutante", homeContent.categoryImages.debutante],
+      ["bodas", homeContent.categoryImages.bodas],
+      ["previewBackground", homeContent.previewBackground]
+    ];
+    imageList.innerHTML = imageItems.map(([slot, src]) => `
+      <div class="admin-row admin-media-row">
+        <img src="${src}" alt="${homeImageLabels[slot]}">
+        <div><strong>${homeImageLabels[slot]}</strong><small>${src.startsWith("data:") ? "imagem enviada no protótipo" : src}</small></div>
+        <button data-image-slot="${slot}">usar</button>
+      </div>
+    `).join("");
+    document.querySelectorAll("[data-image-slot]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.getElementById("admin-image-slot").value = button.dataset.imageSlot;
+        document.getElementById("admin-image-url").value = "";
+      });
+    });
+  }
+  if (cardList) {
+    cardList.innerHTML = serviceCards.map((item, index) => `
+      <div class="admin-row admin-media-row">
+        <img src="${item.image}" alt="${item.title}">
+        <div><strong>${item.title}</strong><small>${item.tag}</small></div>
+        <div class="admin-row-actions">
+          <button data-edit-card="${index}">editar</button>
+          <button data-remove-card="${index}">remover</button>
+        </div>
+      </div>
+    `).join("");
+    document.querySelectorAll("[data-edit-card]").forEach((button) => {
+      button.addEventListener("click", () => fillHomeCardForm(Number(button.dataset.editCard)));
+    });
+    document.querySelectorAll("[data-remove-card]").forEach((button) => {
+      button.addEventListener("click", () => {
+        serviceCards.splice(Number(button.dataset.removeCard), 1);
+        persistVisualContent();
+        resetHomeCardForm();
+        renderServiceRail();
+        renderVisualAdmin();
+      });
+    });
+  }
+  updateHomeCardButton();
+  updateVideoButton();
+}
+
+function renderAdmin() {
+  const categorySelect = document.getElementById("admin-instrument-category");
+  const categoryList = document.getElementById("category-admin-list");
+  const instrumentList = document.getElementById("instrument-admin-list");
+  const videoList = document.getElementById("video-admin-list");
+  if (categorySelect) {
+    categorySelect.innerHTML = state.categories.map((item) => `<option>${item}</option>`).join("");
+  }
+  if (categoryList) {
+    categoryList.innerHTML = state.categories.map((item) => `<span>${item}</span>`).join("");
+  }
+  if (instrumentList) {
+    instrumentList.innerHTML = instruments.map((item) => `
+      <div class="admin-row">
+        <div><strong>${item.name}</strong><small>${item.category}${item.heavy ? " • logística grande" : ""}</small></div>
+        <input type="number" value="${item.price}" data-price="${item.id}">
+      </div>
+    `).join("");
+    document.querySelectorAll("[data-price]").forEach((input) => {
+      input.addEventListener("input", () => {
+        const item = instruments.find((instrument) => instrument.id === input.dataset.price);
+        item.price = Number(input.value || 0);
+        updatePrice();
+      });
+    });
+  }
+  if (videoList) {
+    videoList.innerHTML = previewVideos.map((item) => `
+      <div class="admin-row admin-media-row">
+        <img src="${item.image}" alt="${item.title}">
+        <div><strong>${item.title}</strong><small>${item.formation}${item.videoUrl ? " • com link" : ""}</small></div>
+        <div class="admin-row-actions">
+          <button data-edit-video="${item.id}">editar</button>
+          <button data-remove-video="${item.id}">remover</button>
+        </div>
+      </div>
+    `).join("");
+    document.querySelectorAll("[data-edit-video]").forEach((button) => {
+      button.addEventListener("click", () => fillVideoForm(button.dataset.editVideo));
+    });
+    document.querySelectorAll("[data-remove-video]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const index = previewVideos.findIndex((item) => item.id === button.dataset.removeVideo);
+        if (index < 0) return;
+        previewVideos.splice(index, 1);
+        persistVisualContent();
+        resetVideoForm();
+        renderPreviewVideos(previewVideos[0]?.id);
+        renderAdmin();
+      });
+    });
+  }
+  renderVisualAdmin();
+  renderBlockedDates();
+}
+
+function formatDateBR(dateValue) {
+  if (!dateValue) return "data indefinida";
+  const [year, month, day] = dateValue.split("-");
+  return `${day}/${month}/${year}`;
+}
+
+function isDateBlocked(dateValue) {
+  return state.blockedDates.some((item) => item.date === dateValue);
+}
+
+function blockedDateReason(dateValue) {
+  return state.blockedDates.find((item) => item.date === dateValue)?.reason || "data já reservada";
+}
+
+function setLeadDateStatus(message, type = "") {
+  const status = document.getElementById("lead-date-status");
+  if (!status) return;
+  status.textContent = message;
+  status.className = `date-status ${type}`.trim();
+}
+
+function validateLeadDate(showMessage = false) {
+  const dateInput = document.getElementById("lead-event-date");
+  if (!dateInput) return true;
+  const dateValue = dateInput.value;
+  if (!dateValue) {
+    dateInput.setCustomValidity("");
+    setLeadDateStatus("A agenda será conferida automaticamente.");
+    return true;
+  }
+  if (isDateBlocked(dateValue)) {
+    const message = "NOS DESCULPE, JA TEMOS EVENTO NA DATA DESCRITA E INFELIZMENTE NAO CONSEGUIREMOS ATENDE-LO";
+    dateInput.setCustomValidity(message);
+    setLeadDateStatus(message, "blocked");
+    if (showMessage) dateInput.reportValidity();
+    return false;
+  }
+  dateInput.setCustomValidity("");
+  setLeadDateStatus(`Data disponível no protótipo: ${formatDateBR(dateValue)}.`, "available");
+  return true;
+}
+
+function persistBlockedDates() {
+  state.blockedDates.sort((a, b) => a.date.localeCompare(b.date));
+  writeStorage(storageKeys.blockedDates, state.blockedDates);
+}
+
+function renderBlockedDates() {
+  const list = document.getElementById("blocked-date-list");
+  if (!list) return;
+  if (!state.blockedDates.length) {
+    list.innerHTML = `<div class="empty-state">Nenhuma data bloqueada no momento.</div>`;
+    validateLeadDate();
+    return;
+  }
+  list.innerHTML = state.blockedDates.map((item) => `
+    <div class="blocked-date-row">
+      <div>
+        <strong>${formatDateBR(item.date)}</strong>
+        <small>${item.reason || "data já reservada"}</small>
+      </div>
+      <button data-unblock-date="${item.date}">Liberar</button>
+    </div>
+  `).join("");
+  document.querySelectorAll("[data-unblock-date]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.blockedDates = state.blockedDates.filter((item) => item.date !== button.dataset.unblockDate);
+      persistBlockedDates();
+      renderBlockedDates();
+    });
+  });
+  validateLeadDate();
+}
+
+function curatedMoments() {
+  const preset = eventPresets[state.eventKind] || eventPresets.casamento;
+  const source = state.eventKind === "casamento"
+    ? baseMoments
+    : selectedMomentLabels().map((moment, index) => ({
+        id: `${state.eventKind}-${index}`,
+        moment,
+        title: suggestTitleForMoment(state.eventKind, moment, index),
+        artist: "MAESTTRO",
+        copy: suggestCopyForMoment(state.eventKind, moment),
+        image: index % 2 ? "./assets/celebration-light.png" : "./assets/music-details.png",
+        tags: [preset.formation, state.eventKind, "Editável"],
+        notes: [440, 523.25, 659.25, 587.33, 523.25]
+      }));
+  return source.map((item) => {
+    const next = { ...item };
+    if (state.rite === "espírita" && item.id === "rito") {
+      next.title = "Oração de São Francisco";
+      next.artist = "Tradicional";
+      next.copy = "Sugestão serena e acolhedora, adequada a uma leitura espiritual sem excesso litúrgico.";
+      next.tags = ["Espiritual", "Serena", "Acolhedora"];
+    }
+    if (state.style === "marcante" && item.id === "saida") {
+      next.title = "Signed, Sealed, Delivered";
+      next.artist = "Stevie Wonder";
+      next.copy = "Saída vibrante para transformar o fim da cerimônia em começo de festa.";
+      next.tags = ["Vibrante", "Surpresa", "Festa"];
+    }
+    if (state.style === "minimalista" && item.id === "noiva") {
+      next.title = "The Swan";
+      next.artist = "Saint-Saëns";
+      next.copy = "Entrada elegante e menos óbvia, perfeita para estética limpa e emocional.";
+      next.tags = ["Minimalista", "Clássica", "Refinada"];
+    }
+    if (state.storySong && item.id === "noivo") {
+      next.title = state.storySong;
+      next.artist = "História do casal";
+      next.copy = "A música afetiva do casal entra aqui porque emociona sem competir com a entrada da noiva. Também pode virar tema dos cumprimentos.";
+      next.tags = ["História do casal", "Afetiva", "Personalizada"];
+    }
+    if (state.storySong && state.eventKind !== "casamento" && item.moment.toLowerCase().match(/homenagem|entrada|brinde|reflexão|votos/)) {
+      next.title = state.storySong;
+      next.artist = "História do evento";
+      next.copy = "O MAESTTRO encaixou a música afetiva em um momento de maior significado emocional.";
+      next.tags = ["História", "Personalizada", "Momento-chave"];
+    }
+    return next;
+  });
+}
+
+function suggestTitleForMoment(eventKind, moment, index) {
+  const map = {
+    debutante: ["A Thousand Years", "This Is Me", "Can You Feel the Love Tonight", "Como é Grande o Meu Amor por Você", "Isn't She Lovely", "Viva La Vida"],
+    bodas: ["Eu Sei Que Vou Te Amar", "The Way You Look Tonight", "Ave Maria", "What a Wonderful World", "La Vie en Rose", "All You Need Is Love"],
+    aniversário: ["Fly Me to the Moon", "Treasure", "Photograph", "Parabéns sofisticado", "Happy", "September"],
+    corporativo: ["Feeling Good", "Viva La Vida", "Don't Stop Me Now", "Bittersweet Symphony", "Celebration", "A Sky Full of Stars"],
+    pedido: ["Perfect", "All of Me", "A Thousand Years", "Can't Help Falling in Love"],
+    tributo: ["Amazing Grace", "Ave Maria", "Hallelujah", "Oração de São Francisco", "Nessun Dorma", "Time to Say Goodbye"]
+  };
+  return (map[eventKind] || map.casamento || [])[index] || moment;
+}
+
+function suggestCopyForMoment(eventKind, moment) {
+  const labels = {
+    debutante: "Momento pensado para valorizar a debutante, a família e a transição para a celebração.",
+    bodas: "Escolha afetiva para reforçar memória, continuidade e presença da família.",
+    aniversário: "Trilha leve e social, com energia adequada para cada virada da festa.",
+    corporativo: "Música funcional e premium, criada para apoiar marca, fala e relacionamento.",
+    pedido: "Execução curta, afetiva e precisa para acompanhar o momento do pedido.",
+    tributo: "Repertório sereno e respeitoso, com foco em acolhimento e homenagem."
+  };
+  return `${labels[eventKind] || "Momento personalizado pelo MAESTTRO."} ${moment} recebe uma sugestão que pode ser alterada a qualquer momento.`;
+}
+
+function renderRecommendation() {
+  const rec = currentRecommendation();
+  const heroRecommendation = document.getElementById("hero-recommendation");
+  const setTitle = document.getElementById("set-title");
+  const setDescription = document.getElementById("set-description");
+  const formationName = document.getElementById("formation-name");
+  const formationReason = document.getElementById("formation-reason");
+  if (heroRecommendation) heroRecommendation.textContent = rec.formation;
+  if (setTitle) setTitle.textContent = rec.title;
+  if (setDescription) setDescription.textContent = rec.description;
+  if (formationName) formationName.textContent = rec.formation;
+  if (formationReason) formationReason.textContent = rec.reason;
+  renderLeadContext();
+  renderQuestionFlow();
+  syncSuggestedInstruments();
+  renderTimeline();
+  renderChoices();
+  updatePrice();
+  persistContractContext();
+}
+
+function revealJourneySections() {
+  document.querySelectorAll("[data-after-lead]").forEach((section) => {
+    section.classList.remove("hidden-until-ready");
+    section.classList.remove("locked");
+  });
+}
+
+function renderLeadContext() {
+  const title = document.getElementById("lead-context-title");
+  const copy = document.getElementById("lead-context-copy");
+  const tags = document.getElementById("lead-context-tags");
+  if (!title || !copy || !tags) return;
+  if (!state.lead) {
+    title.textContent = "Dados recebidos";
+    copy.textContent = "A categoria, data e local informados acima orientam as próximas perguntas.";
+    tags.innerHTML = "";
+    return;
+  }
+  title.textContent = `${state.lead.eventType} de ${state.lead.name}`;
+  copy.textContent = "O MAESTTRO já trouxe categoria, data e local para esta etapa. Agora faltam apenas os detalhes musicais.";
+  tags.innerHTML = [
+    state.lead.eventDate ? formatDateBR(state.lead.eventDate) : "data a definir",
+    state.lead.location || "local a definir",
+    state.lead.budget || "investimento a definir"
+  ].map((item) => `<span>${item}</span>`).join("");
+}
+
+function syncSuggestedInstruments() {
+  const byEvent = {
+    casamento: ["violino-1", "violino-2", "violoncelo", "piano"],
+    debutante: ["violino-1", "piano", "voz", "sax"],
+    bodas: ["violino-1", "violoncelo", "voz"],
+    aniversário: ["sax", "piano", "voz"],
+    corporativo: ["sax", "piano"],
+    pedido: ["violino-1", "violoncelo"],
+    tributo: ["violoncelo", "piano", "voz"]
+  };
+  const suggested = byEvent[state.eventKind] || byEvent.casamento;
+  const stillValid = state.selectedInstrumentIds.filter((id) => instruments.some((item) => item.id === id));
+  if (!stillValid.length || state.lastSyncedEvent !== state.eventKind) {
+    state.selectedInstrumentIds = suggested;
+    state.lastSyncedEvent = state.eventKind;
+  }
+}
+
+function bindLeadForm() {
+  const form = document.getElementById("lead-form");
+  if (!form) return;
+  document.getElementById("lead-event-date")?.addEventListener("change", () => validateLeadDate());
+  document.getElementById("lead-event-date")?.addEventListener("input", () => validateLeadDate());
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!validateLeadDate(true)) return;
+    const lead = {
+      name: document.getElementById("lead-name").value.trim(),
+      email: document.getElementById("lead-email").value.trim(),
+      phone: document.getElementById("lead-phone").value.trim(),
+      eventType: document.getElementById("lead-event-type").value,
+      eventDate: document.getElementById("lead-event-date").value,
+      location: document.getElementById("lead-location").value.trim(),
+      zip: document.getElementById("lead-zip").value.trim(),
+      budget: document.getElementById("lead-budget").value,
+      consent: document.getElementById("lead-consent").checked
+    };
+    const eventMap = {
+      Casamento: "casamento",
+      Debutante: "debutante",
+      Bodas: "bodas",
+      Aniversário: "aniversário",
+      Corporativo: "corporativo",
+      "Pedido de casamento": "pedido",
+      "Tributo / Fúnebre": "tributo"
+    };
+    state.eventKind = eventMap[lead.eventType] || "casamento";
+    state.lead = lead;
+    setEventDefaults(state.eventKind);
+    const success = document.getElementById("lead-success");
+    success.hidden = false;
+    success.innerHTML = `Tudo certo, <strong>${lead.name}</strong>. Agora o MAESTTRO vai ajustar a experiência para ${lead.eventType.toLowerCase()} em ${lead.eventDate ? formatDateBR(lead.eventDate) : "data a definir"}.`;
+    revealJourneySections();
+    if (lead.zip) {
+      document.getElementById("travel-zip").value = lead.zip;
+      calculateTravel();
+    }
+    renderRecommendation();
+    document.getElementById("maesttro").scrollIntoView({ behavior: "smooth" });
+  });
+}
+
+function renderChoices() {
+  const instrumentGrid = document.getElementById("instrument-choice-grid");
+  const musicGrid = document.getElementById("music-choice-grid");
+  const total = document.getElementById("choice-total");
+  const count = document.getElementById("instrument-choice-count");
+  const copy = document.getElementById("choice-summary-copy");
+  const musicTitle = document.getElementById("music-choice-title");
+  const musicSubtitle = document.getElementById("music-choice-subtitle");
+  if (!instrumentGrid || !musicGrid) return;
+  const selected = instruments.filter((item) => state.selectedInstrumentIds.includes(item.id));
+  const multiplier = priceMultiplier();
+  instrumentGrid.innerHTML = instruments.map((item) => `
+    <button class="choice-card ${state.selectedInstrumentIds.includes(item.id) ? "active" : ""}" data-choice-instrument="${item.id}">
+      <img src="${item.heavy ? "./assets/music-details.png" : "./assets/celebration-light.png"}" alt="${item.name}">
+      <span>${item.category}${item.heavy ? " • logística especial" : ""}</span>
+      <strong>${item.name}</strong>
+      <small>${money.format(item.price)}${multiplier > 1 ? ` x ${multiplier} blocos` : ""}</small>
+    </button>
+  `).join("");
+  if (state.eventKind === "casamento") {
+    if (musicTitle) musicTitle.textContent = "Músicas sugeridas para cortejos";
+    if (musicSubtitle) musicSubtitle.textContent = "Editável por momento";
+    musicGrid.innerHTML = curatedMoments().map((item) => `
+      <article class="music-choice-card">
+        <img src="${item.image}" alt="${item.moment}">
+        <div>
+          <span>${item.moment}</span>
+          <strong>${item.title}</strong>
+          <small>${item.artist}</small>
+        </div>
+        <div class="music-choice-actions">
+          <button data-play-choice="${item.id}">Ouvir</button>
+          <button data-change-choice="${item.id}">Trocar</button>
+        </div>
+      </article>
+    `).join("");
+  } else {
+    if (musicTitle) musicTitle.textContent = "Briefing de repertório";
+    if (musicSubtitle) musicSubtitle.textContent = "Estilo musical e músicas desejadas";
+    musicGrid.innerHTML = `
+      <article class="music-choice-card briefing-card">
+        <img src="./assets/celebration-light.png" alt="Estilo musical">
+        <div>
+          <span>Estilo musical</span>
+          <strong>${state.musicalStyle}</strong>
+          <small>O admin usa este direcionamento para montar a proposta musical.</small>
+        </div>
+        <div class="music-choice-actions">
+          <button data-briefing-edit="style">Alterar</button>
+        </div>
+      </article>
+      <article class="music-choice-card briefing-card">
+        <img src="./assets/music-details.png" alt="Músicas desejadas">
+        <div>
+          <span>Músicas indicadas</span>
+          <strong>${state.storySong || "Ainda não informado"}</strong>
+          <small>${state.storySong ? "Referência salva no briefing." : "O cliente pode indicar músicas desejadas ou referências afetivas."}</small>
+        </div>
+        <div class="music-choice-actions">
+          <button data-briefing-edit="songs">Indicar</button>
+        </div>
+      </article>
+    `;
+  }
+  const totalValue = selected.reduce((sum, item) => sum + item.price, 0) * multiplier;
+  if (total) total.textContent = money.format(totalValue);
+  if (count) count.textContent = `${selected.length} selecionado${selected.length === 1 ? "" : "s"}`;
+  if (copy) {
+    const durationCopy = multiplier > 1 ? ` Cobrança: ${multiplier} blocos de 60 minutos.` : "";
+    copy.textContent = selected.length ? `${selected.map((item) => item.name).join(", ")}.${durationCopy}` : "Escolha pelo menos uma formação para seguir.";
+  }
+  document.querySelectorAll("[data-choice-instrument]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const id = button.dataset.choiceInstrument;
+      state.selectedInstrumentIds = state.selectedInstrumentIds.includes(id)
+        ? state.selectedInstrumentIds.filter((item) => item !== id)
+        : [...state.selectedInstrumentIds, id];
+      state.transportSelection = instruments.filter((item) => state.selectedInstrumentIds.includes(item.id)).map((item) => item.name);
+      renderChoices();
+      renderTransportInstruments();
+      calculateTravel();
+      updatePrice();
+      persistContractContext();
+    });
+  });
+  document.querySelectorAll("[data-play-choice]").forEach((button) => {
+    button.addEventListener("click", () => playMoment(button.dataset.playChoice));
+  });
+  document.querySelectorAll("[data-change-choice]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const item = curatedMoments().find((moment) => moment.id === button.dataset.changeChoice);
+      const replacement = prompt(`Qual música você quer testar em "${item.moment}"?`, item.title);
+      if (replacement) {
+        state.storySong = replacement;
+        renderRecommendation();
+      }
+    });
+  });
+  document.querySelectorAll("[data-briefing-edit]").forEach((button) => {
+    button.addEventListener("click", () => {
+      if (button.dataset.briefingEdit === "style") {
+        const next = prompt("Qual estilo musical deseja priorizar?", state.musicalStyle);
+        if (next) state.musicalStyle = next;
+      } else {
+        const next = prompt("Quais músicas ou referências deseja indicar?", state.storySong);
+        if (next) state.storySong = next;
+      }
+      renderRecommendation();
+    });
+  });
+  document.querySelectorAll('a[href="./contrato.html"]').forEach((link) => {
+    link.addEventListener("click", persistContractContext);
+  });
+}
+
+function selectedInstruments() {
+  return instruments.filter((item) => state.selectedInstrumentIds.includes(item.id));
+}
+
+function estimatedTotalValue() {
+  const fallback = {
+    minimalista: 2800,
+    romântico: 4800,
+    marcante: 6200
+  };
+  const selectedTotal = selectedInstruments().reduce((sum, item) => sum + item.price, 0);
+  return (selectedTotal || fallback[state.style] || fallback.romântico) * priceMultiplier();
+}
+
+function persistContractContext() {
+  const rec = currentRecommendation();
+  const moments = curatedMoments().map((item) => `${item.moment}: ${item.title}`);
+  writeStorage(storageKeys.contractContext, {
+    lead: state.lead,
+    eventKind: state.eventKind,
+    eventDate: state.lead?.eventDate || "",
+    eventLocation: state.lead?.location || "",
+    formation: rec.formation,
+    instruments: selectedInstruments().map((item) => item.name),
+    musicalStyle: state.musicalStyle,
+    storySong: state.storySong,
+    moments,
+    total: estimatedTotalValue(),
+    updatedAt: new Date().toISOString()
+  });
+}
+
+function renderTimeline() {
+  const timeline = document.getElementById("timeline");
+  if (!timeline) return;
+  if (state.eventKind !== "casamento") {
+    const moments = selectedMomentLabels();
+    timeline.innerHTML = `
+      <article class="moment-card briefing-card">
+        <img src="./assets/celebration-light.png" alt="Escopo do evento">
+        <div>
+          <span>Escopo selecionado</span>
+          <h3>${moments.join(" • ")}</h3>
+          <p>Para esta categoria, o MAESTTRO coleta escopo, estilo musical e músicas desejadas. A curadoria final será montada pelo admin, sem sugestão automática de cortejos.</p>
+        </div>
+        <div class="moment-actions">
+          <button data-scroll-briefing>Editar briefing</button>
+        </div>
+      </article>
+      <article class="moment-card briefing-card">
+        <img src="./assets/music-details.png" alt="Briefing musical">
+        <div>
+          <span>Direção musical</span>
+          <h3>${state.musicalStyle}</h3>
+          <p>${state.storySong ? `Músicas ou referências indicadas: ${state.storySong}.` : "O cliente pode indicar músicas específicas, artistas ou estilos para orientar a proposta."}</p>
+        </div>
+        <div class="moment-actions">
+          <button data-scroll-briefing>Indicar músicas</button>
+        </div>
+      </article>
+    `;
+    document.querySelectorAll("[data-scroll-briefing]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.getElementById("maesttro")?.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+    return;
+  }
+  timeline.innerHTML = curatedMoments().map((item) => `
+    <article class="moment-card">
+      <img src="${item.image}" alt="${item.moment}">
+      <div>
+        <span>${item.moment}</span>
+        <h3>${item.title}</h3>
+        <p>${item.copy}</p>
+      </div>
+      <div class="moment-actions">
+        <button data-open="${item.id}">Por quê?</button>
+        <button data-play="${item.id}">Ouvir</button>
+        <button data-swap="${item.id}">Alterar</button>
+      </div>
+    </article>
+  `).join("");
+
+  document.querySelectorAll("[data-open]").forEach((button) => {
+    button.addEventListener("click", () => openMoment(button.dataset.open));
+  });
+  document.querySelectorAll("[data-play]").forEach((button) => {
+    button.addEventListener("click", () => playMoment(button.dataset.play));
+  });
+  document.querySelectorAll("[data-swap]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const item = curatedMoments().find((moment) => moment.id === button.dataset.swap);
+      const replacement = prompt(`Qual música você quer testar em "${item.moment}"?`, item.title);
+      if (replacement) {
+        state.storySong = replacement;
+        renderRecommendation();
+      }
+    });
+  });
+}
+
+function setEventDefaults(eventKind) {
+  const config = eventFlow[eventKind] || eventFlow.default;
+  if (config.momentOptions && !config.momentOptions.some(([value]) => value === state.eventMoment)) {
+    state.eventMoment = config.momentOptions[0][0];
+  }
+  if (config.durationOptions && !config.durationOptions.some(([value]) => value === state.durationMinutes)) {
+    state.durationMinutes = config.durationOptions[0][0];
+  }
+  if (config.riteOptions && !config.riteOptions.some(([value]) => value === state.rite)) {
+    state.rite = config.riteOptions[0][0];
+  }
+  if (!config.momentOptions && state.eventMoment === "") state.eventMoment = "todos";
+}
+
+function renderQuestionFlow() {
+  const config = flowConfig();
+  const show = new Set(config.show);
+  document.querySelectorAll("[data-dynamic-question]").forEach((card) => {
+    card.hidden = !show.has(card.dataset.dynamicQuestion);
+  });
+
+  const riteTitle = document.getElementById("rite-question-title");
+  if (riteTitle) riteTitle.textContent = config.riteTitle || "Qual é o rito ou contexto?";
+  const riteOptions = document.getElementById("rite-options");
+  if (riteOptions) {
+    const options = config.riteOptions || eventFlow.casamento.riteOptions;
+    riteOptions.innerHTML = options.map(([value, label]) => `
+      <button data-answer="rite" data-value="${value}">${label}</button>
+    `).join("");
+  }
+
+  const storyTitle = document.getElementById("story-question-title");
+  if (storyTitle) storyTitle.textContent = config.storyTitle || "Quais músicas ou estilos você gostaria de indicar?";
+  const storyInput = document.getElementById("story-song");
+  if (storyInput) {
+    storyInput.placeholder = state.eventKind === "casamento"
+      ? "Ex.: música do casal, da família ou de um momento especial..."
+      : "Ex.: músicas desejadas, artistas, referências ou restrições...";
+  }
+  const storyButton = document.getElementById("fit-story-song");
+  if (storyButton) storyButton.textContent = state.eventKind === "casamento" ? "Encaixar no roteiro" : "Salvar indicação";
+
+  const spotifyTitle = document.getElementById("spotify-title");
+  const spotifyCopy = document.getElementById("spotify-copy");
+  if (spotifyTitle) {
+    spotifyTitle.textContent = state.eventKind === "casamento"
+      ? "Traga o Spotify. O MAESTTRO sugere onde cada música cabe melhor."
+      : "Traga referências musicais para orientar a proposta.";
+  }
+  if (spotifyCopy) {
+    spotifyCopy.textContent = state.eventKind === "casamento"
+      ? "Cole um link de playlist ou escreva algumas músicas. A lógica do protótipo simula a curadoria por energia, letra, função emocional e momento da cerimônia."
+      : "Cole um link de playlist ou escreva músicas desejadas. Para esta categoria, elas entram como briefing de repertório para o admin montar a proposta.";
+  }
+
+  const momentTitle = document.getElementById("event-moment-title");
+  if (momentTitle) momentTitle.textContent = config.momentTitle || "Em quais momentos teremos música?";
+
+  const momentOptions = document.getElementById("event-moment-options");
+  if (momentOptions) {
+    momentOptions.innerHTML = (config.momentOptions || []).map(([value, label]) => `
+      <button data-answer="eventMoment" data-value="${value}">${label}</button>
+    `).join("");
+  }
+
+  const durationTitle = document.getElementById("duration-question-title");
+  if (durationTitle) durationTitle.textContent = config.durationTitle || "Qual será a duração?";
+
+  const durationOptions = document.getElementById("duration-options");
+  if (durationOptions) {
+    durationOptions.innerHTML = (config.durationOptions || []).map(([value, label]) => `
+      <button data-answer="durationMinutes" data-value="${value}">${label}</button>
+    `).join("");
+  }
+
+  document.querySelectorAll("[data-answer]").forEach((button) => {
+    button.classList.toggle("active", String(state[button.dataset.answer]) === button.dataset.value);
+  });
+}
+
+function bindQuestions() {
+  const grid = document.querySelector(".question-grid");
+  if (!grid) return;
+  grid.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-answer]");
+    if (!button) return;
+    const key = button.dataset.answer;
+    state[key] = button.dataset.value;
+    if (key === "eventKind") setEventDefaults(state.eventKind);
+    renderQuestionFlow();
+    renderRecommendation();
+  });
+  setEventDefaults(state.eventKind);
+  renderQuestionFlow();
+}
+
+function bindSpotify() {
+  document.getElementById("fit-story-song")?.addEventListener("click", () => {
+    const value = document.getElementById("story-song")?.value.trim() || "";
+    if (!value) return;
+    state.storySong = value;
+    renderRecommendation();
+    document.getElementById("set")?.scrollIntoView({ behavior: "smooth" });
+  });
+
+  document.getElementById("analyze-spotify")?.addEventListener("click", () => {
+    const raw = document.getElementById("spotify-songs")?.value.trim() || "";
+    const link = document.getElementById("spotify-link")?.value.trim() || "";
+    const result = document.getElementById("spotify-result");
+    if (!result) return;
+    const songs = raw ? raw.split("\n").map((line) => line.trim()).filter(Boolean) : ["A Thousand Years - Christina Perri", "Perfect - Ed Sheeran", "Viva La Vida - Coldplay"];
+    if (state.eventKind !== "casamento") {
+      state.storySong = songs.join(", ");
+      result.innerHTML = `
+        ${link ? `<div class="spotify-fit"><div><strong>Playlist recebida</strong><span>Na versão final, a integração usa Spotify Embed/API para exibir ou importar a playlist autorizada.</span></div><em>Spotify</em></div>` : ""}
+        <div class="spotify-fit"><div><strong>Referências salvas no briefing</strong><span>${state.storySong}</span></div><button data-use-briefing>usar</button></div>
+      `;
+      document.querySelector("[data-use-briefing]")?.addEventListener("click", renderRecommendation);
+      renderRecommendation();
+      return;
+    }
+    const moments = ["Entrada do noivo", "Cumprimentos", "Saída dos noivos", "Pré-cerimônia", "Entrada dos padrinhos"];
+    result.innerHTML = `
+      ${link ? `<div class="spotify-fit"><div><strong>Playlist recebida</strong><span>Na versão final, a integração usa Spotify Embed/API para ler ou exibir a playlist autorizada.</span></div><em>Spotify</em></div>` : ""}
+      ${songs.map((song, index) => `<div class="spotify-fit"><div><strong>${song}</strong><span>Melhor encaixe sugerido: ${moments[index % moments.length]}</span></div><button data-use-song="${song}">usar</button></div>`).join("")}
+    `;
+    document.querySelectorAll("[data-use-song]").forEach((button) => {
+      button.addEventListener("click", () => {
+        state.storySong = button.dataset.useSong;
+        renderRecommendation();
+      });
+    });
+  });
+}
+
+function bindTravelControls() {
+  ["travel-zip", "round-trip", "complete-sound"].forEach((id) => {
+    const element = document.getElementById(id);
+    if (!element) return;
+    element.addEventListener("input", () => {
+      if (id === "complete-sound") state.completeSound = element.checked;
+      calculateTravel();
+    });
+    element.addEventListener("change", () => {
+      if (id === "complete-sound") state.completeSound = element.checked;
+      calculateTravel();
+    });
+  });
+  document.getElementById("calculate-travel")?.addEventListener("click", calculateTravel);
+}
+
+function bindAdminControls() {
+  document.getElementById("admin-midi-file")?.addEventListener("change", (event) => {
+    state.midiFileName = event.target.files?.[0]?.name || "";
+  });
+
+  document.getElementById("add-admin-song")?.addEventListener("click", () => {
+    const title = document.getElementById("admin-song-title").value.trim();
+    const artist = document.getElementById("admin-song-artist").value.trim() || "A definir";
+    const moment = document.getElementById("admin-song-moment").value;
+    if (!title) return;
+    baseMoments.push({
+      id: `admin-${Date.now()}`,
+      moment,
+      title,
+      artist,
+      copy: `Música adicionada pelo admin${state.midiFileName ? ` com MIDI: ${state.midiFileName}` : ""}. Pode ser encaixada na curadoria do evento.`,
+      image: "./assets/music-details.png",
+      tags: ["Admin", "MIDI", "Personalizada"],
+      notes: [440, 523.25, 659.25, 587.33, 523.25]
+    });
+    document.getElementById("admin-song-title").value = "";
+    document.getElementById("admin-song-artist").value = "";
+    state.midiFileName = "";
+    renderRecommendation();
+    alert("Música/MIDI adicionada ao catálogo do protótipo.");
+  });
+
+  document.getElementById("add-admin-instrument")?.addEventListener("click", () => {
+    const name = document.getElementById("admin-instrument-name").value.trim();
+    const price = Number(document.getElementById("admin-instrument-price").value || 0);
+    const category = document.getElementById("admin-instrument-category").value || "Personalizado";
+    if (!name || !price) return;
+    instruments.push({
+      id: `inst-${Date.now()}`,
+      name,
+      category,
+      price,
+      heavy: /violoncelo|contrabaixo|som completo|estrutura/i.test(name)
+    });
+    document.getElementById("admin-instrument-name").value = "";
+    document.getElementById("admin-instrument-price").value = "";
+    renderAdmin();
+    renderTransportInstruments();
+    calculateTravel();
+  });
+
+  document.getElementById("add-admin-category")?.addEventListener("click", () => {
+    const name = document.getElementById("admin-category-name").value.trim();
+    if (!name || state.categories.includes(name)) return;
+    state.categories.push(name);
+    document.getElementById("admin-category-name").value = "";
+    renderAdmin();
+  });
+
+  document.getElementById("admin-image-file")?.addEventListener("change", (event) => {
+    readImageFile(event.target.files?.[0], (dataUrl) => {
+      state.imageUploadDataUrl = dataUrl;
+    });
+  });
+
+  document.getElementById("save-home-image")?.addEventListener("click", () => {
+    const slot = document.getElementById("admin-image-slot").value;
+    const url = document.getElementById("admin-image-url").value.trim();
+    const image = url || state.imageUploadDataUrl;
+    if (!slot || !image) return;
+    if (slot === "heroImage") {
+      homeContent.heroImage = image;
+    } else if (slot === "previewBackground") {
+      homeContent.previewBackground = image;
+    } else {
+      homeContent.categoryImages[slot] = image;
+    }
+    state.imageUploadDataUrl = "";
+    document.getElementById("admin-image-url").value = "";
+    document.getElementById("admin-image-file").value = "";
+    persistVisualContent();
+    applyHomeContent();
+    renderVisualAdmin();
+  });
+
+  document.getElementById("save-home-card")?.addEventListener("click", () => {
+    const title = document.getElementById("admin-card-title").value.trim();
+    const tag = document.getElementById("admin-card-tag").value.trim() || "Inspiração";
+    const copy = document.getElementById("admin-card-copy").value.trim() || "Experiência musical personalizada pelo MAESTTRO.";
+    const image = document.getElementById("admin-card-image").value.trim() || "./assets/celebration-light.png";
+    if (!title) return;
+    const payload = { title, tag, copy, image };
+    if (state.homeCardEditIndex === null) {
+      serviceCards.push(payload);
+    } else {
+      serviceCards[state.homeCardEditIndex] = payload;
+    }
+    persistVisualContent();
+    renderServiceRail();
+    resetHomeCardForm();
+    renderVisualAdmin();
+  });
+
+  document.getElementById("cancel-home-card-edit")?.addEventListener("click", resetHomeCardForm);
+
+  document.getElementById("add-blocked-date")?.addEventListener("click", () => {
+    const dateInput = document.getElementById("admin-block-date");
+    const reasonInput = document.getElementById("admin-block-reason");
+    const date = dateInput?.value || "";
+    const reason = reasonInput?.value.trim() || "evento já contratado";
+    if (!date) return;
+    const existing = state.blockedDates.find((item) => item.date === date);
+    if (existing) {
+      existing.reason = reason;
+    } else {
+      state.blockedDates.push({ date, reason });
+    }
+    if (dateInput) dateInput.value = "";
+    if (reasonInput) reasonInput.value = "";
+    persistBlockedDates();
+    renderBlockedDates();
+  });
+
+  document.getElementById("admin-video-file")?.addEventListener("change", (event) => {
+    const file = event.target.files?.[0];
+    state.videoFileName = file?.name || "";
+    state.videoObjectUrl = file ? URL.createObjectURL(file) : "";
+  });
+
+  document.getElementById("admin-video-thumb-file")?.addEventListener("change", (event) => {
+    readImageFile(event.target.files?.[0], (dataUrl) => {
+      state.videoThumbDataUrl = dataUrl;
+      const imageInput = document.getElementById("admin-video-image");
+      if (imageInput) imageInput.value = "";
+    });
+  });
+
+  document.getElementById("add-admin-video")?.addEventListener("click", () => {
+    const title = document.getElementById("admin-video-title").value.trim();
+    const formation = document.getElementById("admin-video-formation").value.trim() || "Formação personalizada";
+    const music = document.getElementById("admin-video-music").value.trim() || state.videoFileName || "Prévia musical";
+    const explicitVideoUrl = document.getElementById("admin-video-url").value.trim();
+    const imageUrl = document.getElementById("admin-video-image").value.trim();
+    const description = document.getElementById("admin-video-description").value.trim();
+    if (!title) return;
+    const existing = previewVideos.find((item) => item.id === state.videoEditId);
+    const payload = {
+      id: existing?.id || `video-${Date.now()}`,
+      title,
+      formation,
+      music,
+      videoUrl: explicitVideoUrl || state.videoObjectUrl || existing?.videoUrl || "",
+      image: state.videoThumbDataUrl || imageUrl || existing?.image || "./assets/celebration-light.png",
+      description: description || `Prévia cadastrada pelo admin${state.videoFileName ? `: ${state.videoFileName}` : ""}.`
+    };
+    if (existing) {
+      Object.assign(existing, payload);
+    } else {
+      previewVideos.push(payload);
+    }
+    persistVisualContent();
+    renderPreviewVideos(payload.id);
+    resetVideoForm();
+    renderAdmin();
+  });
+
+  document.getElementById("cancel-video-edit")?.addEventListener("click", resetVideoForm);
+}
+
+function openMoment(id) {
+  const item = curatedMoments().find((moment) => moment.id === id);
+  document.getElementById("dialog-image").src = item.image;
+  document.getElementById("dialog-moment").textContent = item.moment;
+  document.getElementById("dialog-title").textContent = item.title;
+  document.getElementById("dialog-copy").textContent = item.copy;
+  document.getElementById("dialog-tags").innerHTML = item.tags.map((tag) => `<span>${tag}</span>`).join("");
+  document.getElementById("dialog-play").onclick = () => playNotes(item.notes);
+  document.getElementById("moment-dialog").showModal();
+}
+
+function playMoment(id) {
+  const item = curatedMoments().find((moment) => moment.id === id);
+  playNotes(item.notes);
+}
+
+function playNotes(notes) {
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContext) return;
+  const context = new AudioContext();
+  const now = context.currentTime + 0.04;
+  notes.forEach((frequency, index) => {
+    const osc = context.createOscillator();
+    const gain = context.createGain();
+    osc.type = index % 2 ? "triangle" : "sine";
+    osc.frequency.value = frequency;
+    gain.gain.setValueAtTime(0.0001, now + index * 0.18);
+    gain.gain.exponentialRampToValueAtTime(0.16, now + index * 0.18 + 0.035);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + index * 0.18 + 0.16);
+    osc.connect(gain).connect(context.destination);
+    osc.start(now + index * 0.18);
+    osc.stop(now + index * 0.18 + 0.18);
+  });
+}
+
+function updatePrice() {
+  const totalPrice = document.getElementById("total-price");
+  if (totalPrice) totalPrice.textContent = money.format(estimatedTotalValue());
+}
+
+document.getElementById("close-dialog")?.addEventListener("click", () => {
+  document.getElementById("moment-dialog").close();
+});
+
+document.querySelector("[data-scroll-set]")?.addEventListener("click", () => {
+  document.getElementById("set")?.scrollIntoView({ behavior: "smooth" });
+});
+
+bindQuestions();
+bindLeadForm();
+bindSpotify();
+bindTravelControls();
+bindAdminControls();
+applyHomeContent();
+renderServiceRail();
+renderPreviewVideos();
+renderTransportInstruments();
+renderAdmin();
+calculateTravel();
+renderRecommendation();
+
+</script>
+  </body>
+</html>

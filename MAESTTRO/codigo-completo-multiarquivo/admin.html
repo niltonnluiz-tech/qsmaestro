@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin MAESTTRO | Quartetto Serenatta</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-lockup">
+        <img src="./assets/logo-transparent.png" alt="Quartetto Serenatta" />
+        <span>Acesso administrativo da plataforma MAESTTRO.</span>
+      </div>
+      <nav>
+        <a href="./index.html">Cliente</a>
+        <a href="./quem-somos.html">Quem somos</a>
+        <a href="./contrato.html">Contrato</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="admin-login" class="admin-login-section">
+        <div class="admin-login-card">
+          <span>Perfil Admin</span>
+          <h1>Entre para gerenciar o MAESTTRO.</h1>
+          <p>Este acesso separa a experiência do cliente da gestão de catálogo, agenda, instrumentos e prévias.</p>
+          <form id="admin-login-form" class="admin-login-form">
+            <label>Usuário<input id="admin-user" autocomplete="username" required /></label>
+            <label>Senha<input id="admin-password" type="password" autocomplete="current-password" required /></label>
+            <button class="primary" type="submit">Entrar na gestão</button>
+          </form>
+          <div id="admin-login-message" class="admin-login-message" hidden></div>
+        </div>
+      </section>
+
+      <section id="admin" class="admin-section admin-protected" hidden>
+        <div class="section-title stream-title">
+          <span>Gestão MAESTTRO</span>
+          <h2>Controle músicas, MIDIs, instrumentos, categorias, vídeos e agenda.</h2>
+          <p>Área reservada para o perfil Admin. No produto final, este acesso deve ser validado pelo backend.</p>
+          <button id="admin-logout" class="soft">Sair da gestão</button>
+        </div>
+        <div class="admin-grid">
+          <article class="admin-card admin-card-wide">
+            <h3>Imagens da HOME</h3>
+            <p class="admin-note">Troque capa, imagens das categorias e fundo das prévias. Use URL pública ou uma imagem do computador para testar no protótipo.</p>
+            <select id="admin-image-slot">
+              <option value="heroImage">Capa principal</option>
+              <option value="casamento">Categoria Casamento</option>
+              <option value="debutante">Categoria Debutante</option>
+              <option value="bodas">Categoria Bodas</option>
+              <option value="previewBackground">Fundo da área de prévias</option>
+            </select>
+            <input id="admin-image-url" placeholder="URL da imagem ou deixe vazio para usar upload" />
+            <label class="file-drop">Subir imagem<input id="admin-image-file" type="file" accept="image/*" /></label>
+            <button id="save-home-image" class="primary">Salvar imagem</button>
+            <div id="home-image-admin-list" class="admin-list visual-admin-list"></div>
+          </article>
+
+          <article class="admin-card admin-card-wide">
+            <h3>Cards da vitrine</h3>
+            <p class="admin-note">Edite os cards que aparecem na navegação estilo streaming depois do cadastro do lead.</p>
+            <input id="admin-card-title" placeholder="Título do card" />
+            <input id="admin-card-tag" placeholder="Etiqueta / contexto" />
+            <input id="admin-card-copy" placeholder="Texto curto do card" />
+            <input id="admin-card-image" placeholder="URL da imagem do card" />
+            <button id="save-home-card" class="primary">Adicionar card</button>
+            <button id="cancel-home-card-edit" class="soft" hidden>Cancelar edição</button>
+            <div id="home-card-admin-list" class="admin-list visual-admin-list"></div>
+          </article>
+
+          <article class="admin-card">
+            <h3>Nova música + MIDI</h3>
+            <input id="admin-song-title" placeholder="Nome da música" />
+            <input id="admin-song-artist" placeholder="Artista/compositor" />
+            <select id="admin-song-moment">
+              <option>Entrada dos padrinhos</option>
+              <option>Entrada do noivo</option>
+              <option>Entrada da noiva</option>
+              <option>Rito / oração / assinaturas</option>
+              <option>Saída dos noivos</option>
+              <option>Recepção</option>
+            </select>
+            <label class="file-drop">Subir MIDI<input id="admin-midi-file" type="file" accept=".mid,.midi,audio/midi" /></label>
+            <button id="add-admin-song" class="primary">Adicionar música</button>
+          </article>
+
+          <article class="admin-card">
+            <h3>Instrumentos e valores</h3>
+            <input id="admin-instrument-name" placeholder="Instrumento ou formação" />
+            <input id="admin-instrument-price" type="number" placeholder="Valor base" />
+            <select id="admin-instrument-category"></select>
+            <button id="add-admin-instrument" class="primary">Adicionar instrumento</button>
+            <div id="instrument-admin-list" class="admin-list"></div>
+          </article>
+
+          <article class="admin-card">
+            <h3>Categorias</h3>
+            <input id="admin-category-name" placeholder="Ex.: Cordas premium, Vozes, Cerimônia praia" />
+            <button id="add-admin-category" class="primary">Criar categoria</button>
+            <div id="category-admin-list" class="chip-list"></div>
+          </article>
+
+          <article class="admin-card">
+            <h3>Vídeos de prévia</h3>
+            <input id="admin-video-title" placeholder="Título do vídeo" />
+            <input id="admin-video-formation" placeholder="Formação demonstrada" />
+            <input id="admin-video-music" placeholder="Música / momento demonstrado" />
+            <input id="admin-video-url" placeholder="URL do vídeo, YouTube, Vimeo ou arquivo hospedado" />
+            <input id="admin-video-image" placeholder="URL da thumbnail" />
+            <input id="admin-video-description" placeholder="Descrição curta da prévia" />
+            <label class="file-drop">Subir vídeo<input id="admin-video-file" type="file" accept="video/*" /></label>
+            <label class="file-drop">Subir thumbnail<input id="admin-video-thumb-file" type="file" accept="image/*" /></label>
+            <button id="add-admin-video" class="primary">Adicionar vídeo</button>
+            <button id="cancel-video-edit" class="soft" hidden>Cancelar edição</button>
+            <div id="video-admin-list" class="admin-list"></div>
+          </article>
+
+          <article class="admin-card admin-card-wide">
+            <h3>Agenda e datas bloqueadas</h3>
+            <p class="admin-note">Bloqueie datas já contratadas para impedir novas simulações no mesmo dia.</p>
+            <div class="admin-calendar-form">
+              <label>Data ocupada<input id="admin-block-date" type="date" /></label>
+              <label>Motivo / evento<input id="admin-block-reason" placeholder="Ex.: casamento fechado, reserva técnica..." /></label>
+              <button id="add-blocked-date" class="primary">Bloquear data</button>
+            </div>
+            <div id="blocked-date-list" class="blocked-date-list"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+    <script src="./admin-auth.js"></script>
+  </body>
+</html>
