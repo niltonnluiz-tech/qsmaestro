@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin MAESTTRO | Quartetto Serenatta</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .analytics-charts-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+      .chart-box {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      }
+      @media (max-width: 1024px) {
+        .analytics-charts-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .chart-box-wide {
+          grid-column: span 1 !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-lockup">
+        <img src="./assets/logo-transparent.png" alt="Quartetto Serenatta" />
+        <span>Acesso administrativo da plataforma MAESTTRO.</span>
+      </div>
+      <nav>
+        <a href="./index.html">Cliente</a>
+        <a href="./quem-somos.html">Quem somos</a>
+        <a href="./contrato.html">Contrato</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="admin-login" class="admin-login-section">
+        <div class="admin-login-card">
+          <span>Perfil Admin</span>
+          <h1>Entre para gerenciar o MAESTTRO.</h1>
+          <p>Este acesso separa a experiência do cliente da gestão de catálogo, agenda, instrumentos e prévias.</p>
+          <form id="admin-login-form" class="admin-login-form">
+            <label>Usuário<input id="admin-user" autocomplete="username" required /></label>
+            <label>Senha<input id="admin-password" type="password" autocomplete="current-password" required /></label>
+            <button class="primary" type="submit">Entrar na gestão</button>
+          </form>
+          <div id="admin-login-message" class="admin-login-message" hidden></div>
+        </div>
+      </section>
+
+      <section id="admin" class="admin-section admin-protected" hidden>
+        <div class="section-title stream-title">
+          <span>Gestão MAESTTRO</span>
+          <h2>Controle músicas, MIDIs, instrumentos, categorias, vídeos e agenda.</h2>
+          <p>Área reservada para o perfil Admin. No produto final, este acesso deve ser validado pelo backend.</p>
+          <div class="user-info-badge" id="logged-user-info" style="margin-top: 10px; font-size: 13px; color: var(--gold); font-weight: 600;"></div>
+          <button id="admin-logout" class="soft" style="margin-top: 15px;">Sair da gestão</button>
+        </div>
+
+        <!-- 3 - CONTADOR E VISUALIZADOR DE ACESSOS / VISITANTES (ANALYTICS PANEL) -->
+        <div class="analytics-dashboard" style="background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 24px; margin-bottom: 30px;">
+          <div class="analytics-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--line); padding-bottom: 18px;">
+            <div class="analytics-title-lockup">
+              <span class="badge-blue" style="background: rgba(130, 148, 162, 0.15); color: var(--blue); padding: 4px 10px; border-radius: 999px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">ANALYTICS</span>
+              <h2 style="font-size: 24px; margin: 8px 0 4px; font-weight: 700;">Visão geral</h2>
+              <p style="color: var(--muted); font-size: 13px; margin: 0;">Acompanhe acessos, conversões e desempenho do MAESTTRO em tempo real.</p>
+            </div>
+            <div class="analytics-filters" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <button id="btn-filter-7d" class="active" style="background: var(--ink); color: white; border: none; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; cursor: pointer;">Últimos 7 dias</button>
+              <button id="btn-filter-30d" style="background: transparent; color: var(--text); border: 1px solid var(--line); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; cursor: pointer;">Últimos 30 dias</button>
+              <input type="date" id="input-filter-start" value="2026-07-14" style="border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; font-size: 12px; font-family: inherit;" />
+              <span style="font-size: 12px; color: var(--muted);">até</span>
+              <input type="date" id="input-filter-end" value="2026-07-20" style="border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; font-size: 12px; font-family: inherit;" />
+              <button id="btn-apply-analytics" class="primary" style="padding: 5px 14px; font-size: 12px; border-radius: 999px; margin: 0;">Aplicar</button>
+              <button id="btn-reset-analytics" class="soft" style="padding: 5px 14px; font-size: 12px; border-radius: 999px; margin: 0; color: var(--rose); border: 1px solid rgba(190, 143, 133, 0.4); cursor: pointer; font-weight: 600;">Resetar dados</button>
+            </div>
+          </div>
+
+          <div class="analytics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px;">
+            <!-- Card 1: Total de acessos ao site -->
+            <div class="analytics-card" style="background: white; border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="analytics-card-header" style="display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; font-weight: 600; margin-bottom: 10px;">
+                <span class="analytics-icon" style="font-size: 16px; color: var(--blue);">👁</span>
+                <span class="analytics-card-title">Total de acessos ao site</span>
+              </div>
+              <strong id="analytics-visits" style="font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.2;">1.426</strong>
+              <span class="analytics-pill positive" style="display: inline-block; background: rgba(128, 144, 127, 0.15); color: #435b42; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 10px; align-self: flex-start;">▲ 25,0% vs período anterior</span>
+            </div>
+
+            <!-- Card 2: Total de simulações -->
+            <div class="analytics-card" style="background: white; border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="analytics-card-header" style="display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; font-weight: 600; margin-bottom: 10px;">
+                <span class="analytics-icon" style="font-size: 16px; color: var(--blue);">📋</span>
+                <span class="analytics-card-title">Simulações de eventos</span>
+              </div>
+              <strong id="analytics-simulations" style="font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.2;">91</strong>
+              <span class="analytics-pill positive" style="display: inline-block; background: rgba(128, 144, 127, 0.15); color: #435b42; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 10px; align-self: flex-start;">▲ 28,2% vs período anterior</span>
+            </div>
+
+            <!-- Card 3: Cliques WhatsApp -->
+            <div class="analytics-card" style="background: white; border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="analytics-card-header" style="display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; font-weight: 600; margin-bottom: 10px;">
+                <span class="analytics-icon" style="font-size: 16px; color: var(--rose);">💬</span>
+                <span class="analytics-card-title">Cliques botão WhatsApp</span>
+              </div>
+              <strong id="analytics-whatsapp" style="font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.2;">3</strong>
+              <span class="analytics-pill negative" style="display: inline-block; background: rgba(190, 143, 133, 0.15); color: #8a483c; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 10px; align-self: flex-start;">▼ 40,0% vs período anterior</span>
+            </div>
+
+            <!-- Card 4: Contratos Iniciados -->
+            <div class="analytics-card" style="background: white; border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="analytics-card-header" style="display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; font-weight: 600; margin-bottom: 10px;">
+                <span class="analytics-icon" style="font-size: 16px; color: var(--rose);">✉</span>
+                <span class="analytics-card-title">Contratos iniciados</span>
+              </div>
+              <strong id="analytics-contracts-started" style="font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.2;">1</strong>
+              <span class="analytics-pill negative" style="display: inline-block; background: rgba(190, 143, 133, 0.15); color: #8a483c; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 10px; align-self: flex-start;">▼ 85,7% vs período anterior</span>
+            </div>
+
+            <!-- Card 5: Músicas -->
+            <div class="analytics-card" style="background: white; border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="analytics-card-header" style="display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; font-weight: 600; margin-bottom: 10px;">
+                <span class="analytics-icon" style="font-size: 16px; color: var(--gold);">🎵</span>
+                <span class="analytics-card-title">Músicas cadastradas</span>
+              </div>
+              <strong id="analytics-songs" style="font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.2;">34</strong>
+              <span class="analytics-pill positive" style="display: inline-block; background: rgba(128, 144, 127, 0.15); color: #435b42; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 10px; align-self: flex-start;">▲ 14,3% vs período anterior</span>
+            </div>
+
+            <!-- Card 6: Contratos Fechados/Salvos -->
+            <div class="analytics-card" style="background: white; border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="analytics-card-header" style="display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; font-weight: 600; margin-bottom: 10px;">
+                <span class="analytics-icon" style="font-size: 16px; color: var(--rose);">✍</span>
+                <span class="analytics-card-title">Contratos preenchidos</span>
+              </div>
+              <strong id="analytics-contracts" style="font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.2;">4</strong>
+              <span class="analytics-pill negative" style="display: inline-block; background: rgba(190, 143, 133, 0.15); color: #8a483c; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 10px; align-self: flex-start;">▼ 66,7% vs período anterior</span>
+            </div>
+
+            <!-- Card 7: Tempo Médio -->
+            <div class="analytics-card" style="background: white; border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="analytics-card-header" style="display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; font-weight: 600; margin-bottom: 10px;">
+                <span class="analytics-icon" style="font-size: 16px; color: var(--blue);">⏱</span>
+                <span class="analytics-card-title">Tempo médio no site</span>
+              </div>
+              <strong id="analytics-avg-time" style="font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.2;">8m 50s</strong>
+              <span class="analytics-pill positive" style="display: inline-block; background: rgba(128, 144, 127, 0.15); color: #435b42; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 10px; align-self: flex-start;">▲ 121,6% vs período anterior</span>
+            </div>
+
+            <!-- Card 8: Prévias ativas -->
+            <div class="analytics-card" style="background: white; border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="analytics-card-header" style="display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; font-weight: 600; margin-bottom: 10px;">
+                <span class="analytics-icon" style="font-size: 16px; color: var(--blue);">🎥</span>
+                <span class="analytics-card-title">Prévias ativas</span>
+              </div>
+              <strong id="analytics-videos" style="font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.2;">3</strong>
+              <span class="analytics-pill positive" style="display: inline-block; background: rgba(128, 144, 127, 0.15); color: #435b42; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 10px; align-self: flex-start;">▲ 14,3% vs período anterior</span>
+            </div>
+          </div>
+
+          <!-- Gráficos de Desempenho / Visual Analytics -->
+          <div class="analytics-charts-grid">
+            <!-- Row 1 -->
+            <div class="chart-box">
+              <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 4px 0; color: var(--ink); font-family: Georgia, serif;">Acessos no período</h3>
+              <p style="color: var(--muted); font-size: 11px; margin: 0 0 16px 0;">14/07/2026 - 20/07/2026</p>
+              <div style="position: relative; height: 260px; width: 100%;">
+                <canvas id="chart-access-period"></canvas>
+              </div>
+            </div>
+            
+            <div class="chart-box">
+              <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 4px 0; color: var(--ink); font-family: Georgia, serif;">Evolução diária</h3>
+              <p style="color: var(--muted); font-size: 11px; margin: 0 0 16px 0;">Últimos 30 dias</p>
+              <div style="position: relative; height: 260px; width: 100%;">
+                <canvas id="chart-daily-evolution"></canvas>
+              </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="chart-box">
+              <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 4px 0; color: var(--ink); font-family: Georgia, serif;">Músicas mais tocadas</h3>
+              <p style="color: var(--muted); font-size: 11px; margin: 0 0 16px 0;">Ranking por visualizações</p>
+              <div style="position: relative; height: 260px; width: 100%;">
+                <canvas id="chart-most-viewed-songs"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-box">
+              <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 4px 0; color: var(--ink); font-family: Georgia, serif;">Mais cliques no WhatsApp</h3>
+              <p style="color: var(--muted); font-size: 11px; margin: 0 0 16px 0;">Ranking por música/momento</p>
+              <div style="position: relative; height: 260px; width: 100%;">
+                <canvas id="chart-whatsapp-clicks"></canvas>
+              </div>
+            </div>
+
+            <!-- Row 3: Full Width -->
+            <div class="chart-box chart-box-wide" style="grid-column: span 2;">
+              <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 4px 0; color: var(--ink); font-family: Georgia, serif;">Visitas por página</h3>
+              <p style="color: var(--muted); font-size: 11px; margin: 0 0 16px 0;">Top páginas no período filtrado</p>
+              <div style="position: relative; height: 280px; width: 100%;">
+                <canvas id="chart-visits-by-page"></canvas>
+              </div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="chart-box">
+              <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 4px 0; color: var(--ink); font-family: Georgia, serif;">Dispositivos</h3>
+              <p style="color: var(--muted); font-size: 11px; margin: 0 0 16px 0;">Desktop, mobile e tablet</p>
+              <div style="position: relative; height: 260px; width: 100%; display: flex; justify-content: center; align-items: center;">
+                <canvas id="chart-devices" style="max-height: 240px; max-width: 240px;"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-box">
+              <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 4px 0; color: var(--ink); font-family: Georgia, serif;">Origem dos acessos</h3>
+              <p style="color: var(--muted); font-size: 11px; margin: 0 0 16px 0;">Google, redes, direto e outros</p>
+              <div style="position: relative; height: 260px; width: 100%; display: flex; justify-content: center; align-items: center;">
+                <canvas id="chart-origins" style="max-height: 240px; max-width: 240px;"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Funil de Conversão -->
+          <div class="funnel-container" style="background: white; border: 1px solid var(--line); border-radius: 12px; padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h3 style="font-size: 16px; font-weight: 700; margin: 0; color: var(--ink);">Funil de conversão</h3>
+              <div id="funnel-percent" style="font-size: 24px; font-weight: 700; color: #216d16;">4,4%</div>
+            </div>
+            <p class="funnel-subtitle" style="color: var(--muted); font-size: 12px; margin: 0 0 18px 0;">Visualizações de vagas/Acessos ➜ WhatsApp ou simulações concluídas ➜ Contratos iniciados/preenchidos</p>
+            <div class="funnel-row" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+              <div class="funnel-stage" style="background: #f7f9fa; border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; flex: 1; min-width: 140px; text-align: center;">
+                <span class="funnel-stage-label" style="font-size: 10px; font-weight: 700; color: var(--muted); display: block; letter-spacing: 0.05em; margin-bottom: 4px;">VISUALIZAÇÕES</span>
+                <strong id="funnel-visits" style="font-size: 20px; font-weight: 700; color: var(--ink);">1.426</strong>
+              </div>
+              <div class="funnel-arrow" style="font-size: 18px; color: var(--muted); text-align: center; width: 30px;">➔</div>
+              <div class="funnel-stage" style="background: #f7f9fa; border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; flex: 1; min-width: 140px; text-align: center;">
+                <span class="funnel-stage-label" style="font-size: 10px; font-weight: 700; color: var(--muted); display: block; letter-spacing: 0.05em; margin-bottom: 4px;">CLIQUES WHATSAPP</span>
+                <strong id="funnel-whatsapp" style="font-size: 20px; font-weight: 700; color: var(--ink);">3</strong>
+                <span id="funnel-ratio-1" style="display: block; font-size: 11px; color: var(--muted); margin-top: 2px;">3,3% conv.</span>
+              </div>
+              <div class="funnel-arrow" style="font-size: 18px; color: var(--muted); text-align: center; width: 30px;">➔</div>
+              <div class="funnel-stage" style="background: #f7f9fa; border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; flex: 1; min-width: 140px; text-align: center;">
+                <span class="funnel-stage-label" style="font-size: 10px; font-weight: 700; color: var(--muted); display: block; letter-spacing: 0.05em; margin-bottom: 4px;">CONTRATOS ENVIADOS</span>
+                <strong id="funnel-contracts-num" style="font-size: 20px; font-weight: 700; color: var(--ink);">4</strong>
+                <span id="funnel-ratio-2" style="display: block; font-size: 11px; color: var(--muted); margin-top: 2px;">133,3% conv.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-grid">
+          <article class="admin-card admin-card-wide">
+            <h3>Imagens da HOME</h3>
+            <p class="admin-note">Troque capa, imagens das categorias e fundo das prévias. Use URL pública ou uma imagem do computador para testar no protótipo.</p>
+            <select id="admin-image-slot">
+              <option value="heroImage">Capa principal</option>
+              <option value="casamento">Categoria Casamento</option>
+              <option value="debutante">Categoria Debutante</option>
+              <option value="bodas">Categoria Bodas</option>
+              <option value="previewBackground">Fundo da área de prévias</option>
+            </select>
+            <input id="admin-image-url" placeholder="URL da imagem ou deixe vazio para usar upload" />
+            <label class="file-drop">Subir imagem<input id="admin-image-file" type="file" accept="image/*" /></label>
+            <button id="save-home-image" class="primary">Salvar imagem</button>
+            <div id="home-image-admin-list" class="admin-list visual-admin-list"></div>
+          </article>
+
+          <article class="admin-card admin-card-wide">
+            <h3>Cards da vitrine</h3>
+            <p class="admin-note">Edite os cards que aparecem na navegação estilo streaming depois do cadastro do lead.</p>
+            <input id="admin-card-title" placeholder="Título do card" />
+            <input id="admin-card-tag" placeholder="Etiqueta / contexto" />
+            <input id="admin-card-copy" placeholder="Texto curto do card" />
+            <input id="admin-card-image" placeholder="URL da imagem do card" />
+            <button id="save-home-card" class="primary">Adicionar card</button>
+            <button id="cancel-home-card-edit" class="soft" hidden>Cancelar edição</button>
+            <div id="home-card-admin-list" class="admin-list visual-admin-list"></div>
+          </article>
+
+          <article class="admin-card">
+            <h3>Nova música + MIDI</h3>
+            <input id="admin-song-title" placeholder="Nome da música" />
+            <input id="admin-song-artist" placeholder="Artista/compositor" />
+            <select id="admin-song-moment">
+              <option>Entrada dos padrinhos</option>
+              <option>Entrada do noivo</option>
+              <option>Entrada da noiva</option>
+              <option>Rito / oração / assinaturas</option>
+              <option>Saída dos noivos</option>
+              <option>Recepção</option>
+            </select>
+            <label class="file-drop">Subir MIDI<input id="admin-midi-file" type="file" accept=".mid,.midi,audio/midi" /></label>
+            <button id="add-admin-song" class="primary">Adicionar música</button>
+          </article>
+
+          <article class="admin-card">
+            <h3>Instrumentos e valores</h3>
+            <input id="admin-instrument-name" placeholder="Instrumento ou formação" />
+            <input id="admin-instrument-price" type="number" placeholder="Valor base" />
+            <select id="admin-instrument-category"></select>
+            <button id="add-admin-instrument" class="primary">Adicionar instrumento</button>
+            <div id="instrument-admin-list" class="admin-list"></div>
+          </article>
+
+          <article class="admin-card">
+            <h3>Categorias</h3>
+            <input id="admin-category-name" placeholder="Ex.: Cordas premium, Vozes, Cerimônia praia" />
+            <button id="add-admin-category" class="primary">Criar categoria</button>
+            <div id="category-admin-list" class="chip-list"></div>
+          </article>
+
+          <article class="admin-card">
+            <h3>Vídeos de prévia</h3>
+            <input id="admin-video-title" placeholder="Título do vídeo" />
+            <input id="admin-video-formation" placeholder="Formação demonstrada" />
+            <input id="admin-video-music" placeholder="Música / momento demonstrado" />
+            <input id="admin-video-url" placeholder="URL do vídeo, YouTube, Vimeo ou arquivo hospedado" />
+            <input id="admin-video-image" placeholder="URL da thumbnail" />
+            <input id="admin-video-description" placeholder="Descrição curta da prévia" />
+            <label class="file-drop">Subir vídeo<input id="admin-video-file" type="file" accept="video/*" /></label>
+            <label class="file-drop">Subir thumbnail<input id="admin-video-thumb-file" type="file" accept="image/*" /></label>
+            <button id="add-admin-video" class="primary">Adicionar vídeo</button>
+            <button id="cancel-video-edit" class="soft" hidden>Cancelar edição</button>
+            <div id="video-admin-list" class="admin-list"></div>
+          </article>
+
+          <article class="admin-card admin-card-wide">
+            <h3>Agenda e datas bloqueadas</h3>
+            <p class="admin-note">Bloqueie datas já contratadas para impedir novas simulações no mesmo dia.</p>
+            <div class="admin-calendar-form">
+              <label>Data ocupada<input id="admin-block-date" type="date" /></label>
+              <label>Motivo / evento<input id="admin-block-reason" placeholder="Ex.: casamento fechado, reserva técnica..." /></label>
+              <button id="add-blocked-date" class="primary">Bloquear data</button>
+            </div>
+            <div id="blocked-date-list" class="blocked-date-list"></div>
+          </article>
+
+          <!-- 2 - SISTEMA DE NOVOS USUÁRIOS E SELEÇÃO DE PERMISSÕES -->
+          <article class="admin-card admin-card-wide" id="user-management-panel">
+            <h3>Gerenciamento de Usuários e Permissões</h3>
+            <p class="admin-note">Inclua novos usuários para controle do sistema e determine o nível de acesso (Administrador, Editor ou Visualizador).</p>
+            <form id="admin-user-form" class="admin-user-form" onsubmit="event.preventDefault();" style="display: flex; flex-direction: column; gap: 14px;">
+              <div class="form-row-three" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: var(--muted);">
+                  Nome / Usuário 
+                  <input id="new-user-username" placeholder="Ex.: Nilton" required style="border: 1px solid var(--line); border-radius: 12px; background: white; color: var(--text); padding: 10px 12px; font-size: 14px;" />
+                </label>
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: var(--muted);">
+                  Senha 
+                  <input id="new-user-password" type="password" placeholder="Digite a senha" required style="border: 1px solid var(--line); border-radius: 12px; background: white; color: var(--text); padding: 10px 12px; font-size: 14px;" />
+                </label>
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: var(--muted);">
+                  Permissão 
+                  <select id="new-user-permission" style="border: 1px solid var(--line); border-radius: 12px; background: white; color: var(--text); padding: 10px 12px; font-size: 14px;">
+                    <option value="Admin">Administrador (Acesso Total)</option>
+                    <option value="Editor">Editor (Sem excluir, pode editar)</option>
+                    <option value="Visualizador">Visualizador (Somente Leitura)</option>
+                  </select>
+                </label>
+              </div>
+              <button id="btn-add-user" class="primary" type="button" style="align-self: flex-start; margin-top: 8px;">Cadastrar Usuário</button>
+            </form>
+            <div id="admin-users-list" class="admin-list" style="margin-top: 18px; max-height: 250px; overflow-y: auto;"></div>
+          </article>
+
+          <!-- 1 - SISTEMA DE BACKUP INTEGRAL -->
+          <article class="admin-card admin-card-wide" id="backup-management-panel">
+            <h3>Sistema de Backup Integral</h3>
+            <p class="admin-note">O sistema salva simulações e rascunhos de forma automática a cada nova informação inserida ou quando a função salvar/continuar é utilizada. Aqui você pode realizar backups manuais e restaurar estados do sistema.</p>
+            <div class="backup-actions" style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;">
+              <button id="btn-create-backup" class="primary">Criar Backup Manual</button>
+              <label class="btn-import-label" style="display: inline-block; padding: 10px 20px; background: white; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 700; cursor: pointer;">
+                Importar Arquivo de Backup (.json)
+                <input id="import-backup-file" type="file" accept=".json" style="display:none;" />
+              </label>
+            </div>
+            <h4 style="font-size: 14px; font-weight: 700; margin: 16px 0 8px 0; color: var(--ink);">Histórico de Backups</h4>
+            <div id="backup-history-list" class="admin-list" style="max-height: 250px; overflow-y: auto;"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./supabase-config.js"></script>
+    <script src="./supabase-client.js"></script>
+    <script src="./app.js"></script>
+    <script src="./admin-charts.js"></script>
+    <script src="./admin-auth.js"></script>
+  </body>
+</html>

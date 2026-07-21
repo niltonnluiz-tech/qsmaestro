@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projeto MAESTTRO | Quartetto Serenatta</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-lockup">
+        <img src="./assets/logo-transparent.png" alt="Quartetto Serenatta" />
+        <span>A primeira plataforma self-service do mundo para contratar músicos ao vivo.</span>
+      </div>
+      <nav>
+        <a href="#categorias">Categorias</a>
+        <a href="./quem-somos.html">Quem somos</a>
+        <a href="#lead">Meu evento</a>
+        <a href="#previas">Prévias</a>
+        <a href="#spotify">Referências</a>
+        <a href="./admin.html">Admin</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Projeto MAESTTRO • Self-service musical</p>
+          <h1>A forma mais intuitiva de montar música ao vivo para um evento.</h1>
+          <p>Uma experiência inédita para contratar músicos: o cliente conta o essencial, refina a ocasião com poucas escolhas e recebe uma direção musical clara, sempre editável.</p>
+          <div class="hero-actions">
+            <a class="primary" href="#lead">Começar pelo meu evento</a>
+            <a class="soft" href="#categorias">Explorar categorias</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img id="hero-cover-image" src="./assets/capa-quartetto-serenatta.jpeg" alt="Quartetto Serenatta em apresentação" />
+          <div class="floating-card">
+            <span>MAESTTRO em ação</span>
+            <strong id="hero-recommendation">Quarteto de cordas + piano leve</strong>
+            <small>Uma jornada guiada para transformar intenção, repertório e formação em uma proposta musical sob medida.</small>
+          </div>
+        </div>
+      </section>
+
+      <section id="categorias" class="category-section">
+        <div class="section-title">
+          <span>Escolha a ocasião</span>
+          <h2>Cada tipo de evento abre uma experiência própria.</h2>
+        </div>
+        <div class="category-grid">
+          <a href="#lead" class="category-card">
+            <img data-home-image="casamento" src="./assets/ceremony-garden.png" alt="" />
+            <div><span>Casamento</span><h3>Cerimônia</h3><p>Rito, entradas, repertório afetivo e assinatura emocional do casal.</p></div>
+          </a>
+          <a href="#lead" class="category-card">
+            <img data-home-image="debutante" src="./assets/celebration-light.png" alt="" />
+            <div><span>Debutante</span><h3>15 anos</h3><p>Recepção, valsa, homenagens, entrada triunfal e pista sofisticada.</p></div>
+          </a>
+          <a href="#lead" class="category-card">
+            <img data-home-image="bodas" src="./assets/music-details.png" alt="" />
+            <div><span>Bodas</span><h3>História</h3><p>Releituras afetivas para celebrar décadas, família e memória.</p></div>
+          </a>
+          <a href="#lead" class="category-card muted-card">
+            <div><span>Mais categorias</span><h3>Aniversário, corporativo e tributo</h3><p>Sets por objetivo: celebrar, acolher, impressionar ou homenagear.</p></div>
+          </a>
+        </div>
+      </section>
+
+      <section id="lead" class="lead-section">
+        <div class="section-title">
+          <span>Sua ocasião</span>
+          <h2>Conte o essencial para o MAESTTRO começar certo.</h2>
+          <p>Categoria, data e local alimentam a próxima etapa. Assim o cliente não responde a mesma coisa duas vezes.</p>
+        </div>
+        <form id="lead-form" class="lead-form">
+          <label>Nome<input id="lead-name" required placeholder="Nome completo" /></label>
+          <label>E-mail<input id="lead-email" type="email" required placeholder="email@exemplo.com" /></label>
+          <label>Telefone<input id="lead-phone" required placeholder="(11) 99999-9999" /></label>
+          <label>Tipo de evento
+            <select id="lead-event-type" required>
+              <option>Casamento</option>
+              <option>Debutante</option>
+              <option>Bodas</option>
+              <option>Aniversário</option>
+              <option>Corporativo</option>
+              <option>Tributo / Fúnebre</option>
+              <option>Pedido de casamento</option>
+              <option>Outro</option>
+            </select>
+          </label>
+          <label>Data do evento
+            <input id="lead-event-date" type="date" required />
+            <small id="lead-date-status" class="date-status" aria-live="polite">A agenda será conferida automaticamente.</small>
+          </label>
+          <label>Local do evento<input id="lead-location" required placeholder="Nome do espaço, cidade ou endereço" /></label>
+          <label>CEP do evento<input id="lead-zip" placeholder="Opcional, ajuda no deslocamento" /></label>
+          <label>Faixa desejada de investimento
+            <select id="lead-budget">
+              <option>A definir</option>
+              <option>Até R$ 3.000</option>
+              <option>R$ 3.000 a R$ 6.000</option>
+              <option>R$ 6.000 a R$ 10.000</option>
+              <option>Acima de R$ 10.000</option>
+            </select>
+          </label>
+          <label class="lead-consent"><input id="lead-consent" type="checkbox" checked /> Aceito receber contato do Quartetto Serenatta sobre minha simulação.</label>
+          <button class="primary" type="submit">Continuar para o MAESTTRO</button>
+        </form>
+        <div id="lead-success" class="lead-success" hidden></div>
+      </section>
+
+      <section id="maesttro" class="concierge locked-section locked hidden-until-ready" data-after-lead>
+        <div class="section-title">
+          <span>MAESTTRO</span>
+          <h2>Agora ajuste a experiência com perguntas simples.</h2>
+        </div>
+
+        <div class="question-grid">
+          <article class="question-card lead-context-card" data-question="leadContext">
+            <span>00</span>
+            <h3 id="lead-context-title">Dados recebidos</h3>
+            <p id="lead-context-copy">A categoria, data e local informados acima orientam as próximas perguntas.</p>
+            <div id="lead-context-tags" class="context-tags"></div>
+          </article>
+          <article class="question-card" data-question="venue" data-dynamic-question="venue">
+            <span>01</span>
+            <h3>Onde será o evento?</h3>
+            <div class="option-row">
+              <button data-answer="venue" data-value="fechado">Local fechado</button>
+              <button data-answer="venue" data-value="ar livre">Ao ar livre</button>
+              <button data-answer="venue" data-value="praia/campo">Praia ou campo</button>
+            </div>
+          </article>
+
+          <article class="question-card" data-question="style" data-dynamic-question="style">
+            <span>02</span>
+            <h3>Qual é a personalidade visual?</h3>
+            <div class="option-row">
+              <button data-answer="style" data-value="minimalista">Minimalista</button>
+              <button data-answer="style" data-value="romântico">Romântico</button>
+              <button data-answer="style" data-value="marcante">Chamativo</button>
+            </div>
+          </article>
+
+          <article class="question-card" data-question="rite" data-dynamic-question="rite">
+            <span>03</span>
+            <h3 id="rite-question-title">Qual é o rito ou contexto?</h3>
+            <div class="option-row" id="rite-options"></div>
+          </article>
+
+          <article class="question-card" data-question="eventMoment" data-dynamic-question="eventMoment" hidden>
+            <span>03</span>
+            <h3 id="event-moment-title">Em quais momentos teremos música?</h3>
+            <div class="option-row" id="event-moment-options"></div>
+          </article>
+
+          <article class="question-card" data-question="durationMinutes" data-dynamic-question="duration" hidden>
+            <span>04</span>
+            <h3 id="duration-question-title">Qual será a duração?</h3>
+            <div class="option-row" id="duration-options"></div>
+          </article>
+
+          <article class="question-card" data-question="musicalStyle" data-dynamic-question="musicalStyle" hidden>
+            <span>05</span>
+            <h3>Qual estilo musical combina com o evento?</h3>
+            <div class="option-row">
+              <button data-answer="musicalStyle" data-value="clássico">Clássico</button>
+              <button data-answer="musicalStyle" data-value="romântico">Romântico</button>
+              <button data-answer="musicalStyle" data-value="pop internacional">Pop internacional</button>
+              <button data-answer="musicalStyle" data-value="mpb">MPB</button>
+              <button data-answer="musicalStyle" data-value="lounge">Lounge</button>
+              <button data-answer="musicalStyle" data-value="sacro">Sacro</button>
+            </div>
+          </article>
+
+          <article class="question-card" data-question="emotion" data-dynamic-question="emotion">
+            <span>04</span>
+            <h3>O que vocês querem provocar?</h3>
+            <div class="option-row">
+              <button data-answer="emotion" data-value="lágrimas">Lágrimas</button>
+              <button data-answer="emotion" data-value="leveza">Leveza</button>
+              <button data-answer="emotion" data-value="aplausos">Aplausos</button>
+              <button data-answer="emotion" data-value="surpresa">Surpresa</button>
+            </div>
+          </article>
+
+          <article class="question-card wide" data-question="story" data-dynamic-question="story">
+            <span>05</span>
+            <h3 id="story-question-title">Existe uma música da história do evento?</h3>
+            <div class="story-input">
+              <input id="story-song" placeholder="Ex.: música do casal, da família, da marca ou da homenagem..." />
+              <button id="fit-story-song">Encaixar no roteiro</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="escolhas" class="choices-section locked-section locked hidden-until-ready" data-after-lead>
+        <div class="section-title">
+          <span>Sua montagem musical</span>
+          <h2>Ajuste formação, referências e repertório com clareza.</h2>
+          <p>O MAESTTRO parte dos dados do evento e deixa o cliente refinar músicos, duração, estilo e músicas importantes.</p>
+        </div>
+        <div class="choices-layout">
+          <div>
+            <div class="choice-heading">
+              <h3>Músicos e formações</h3>
+              <span id="instrument-choice-count"></span>
+            </div>
+            <div class="choice-grid" id="instrument-choice-grid"></div>
+          </div>
+          <aside class="choice-summary">
+            <span>Resumo das escolhas</span>
+            <strong id="choice-total">R$ 0,00</strong>
+            <p id="choice-summary-copy">Cadastre o evento para liberar recomendações e escolhas.</p>
+            <a class="primary" href="#set">Ver roteiro musical</a>
+            <a class="soft contract-link" href="./contrato.html">Dados para contrato</a>
+          </aside>
+          <div class="music-choice-area">
+            <div class="choice-heading">
+              <h3 id="music-choice-title">Músicas sugeridas</h3>
+              <span id="music-choice-subtitle">Editável por momento</span>
+            </div>
+            <div class="music-choice-grid" id="music-choice-grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="vitrine" class="stream-section hidden-until-ready" data-after-lead>
+        <div class="section-title stream-title">
+          <span>Inspirações</span>
+          <h2>Navegue por cenas, formações, climas e momentos.</h2>
+        </div>
+        <div class="stream-rail" id="service-rail"></div>
+      </section>
+
+      <section id="set" class="set-section hidden-until-ready" data-after-lead>
+        <div class="set-intro">
+          <span>Roteiro musical</span>
+          <h2 id="set-title">Romance clássico com assinatura cinematográfica.</h2>
+          <p id="set-description">Uma formação elegante para cerimônia com emoção crescente, rito respeitado e saída memorável.</p>
+        </div>
+
+        <aside class="set-summary">
+          <span>Formação sugerida</span>
+          <strong id="formation-name">Quarteto de cordas + piano leve</strong>
+          <p id="formation-reason">Ideal para local fechado, entrada imponente e repertório com textura emocional.</p>
+          <a class="primary" href="./contrato.html">Gostei dessa direção</a>
+        </aside>
+
+        <div class="timeline" id="timeline"></div>
+      </section>
+
+      <section id="previas" class="preview-section">
+        <div class="section-title stream-title">
+          <span>Veja antes de escolher</span>
+          <h2>Prévias por formação, música e clima de cerimônia.</h2>
+        </div>
+        <div class="preview-layout">
+          <div class="preview-hero" id="preview-hero"></div>
+          <div class="preview-list" id="preview-list"></div>
+        </div>
+      </section>
+
+      <section id="spotify" class="spotify-section">
+        <div>
+          <span>Playlist afetiva</span>
+          <h2 id="spotify-title">Traga o Spotify. O MAESTTRO sugere onde cada música cabe melhor.</h2>
+          <p id="spotify-copy">Cole um link de playlist ou escreva algumas músicas. A lógica do protótipo simula a curadoria por energia, letra, função emocional e momento da cerimônia.</p>
+        </div>
+        <div class="spotify-box">
+          <label>
+            Link da playlist Spotify
+            <input id="spotify-link" placeholder="https://open.spotify.com/playlist/..." />
+          </label>
+          <label>
+            Músicas importantes para a história do evento
+            <textarea id="spotify-songs" placeholder="Yellow - Coldplay&#10;Perfect - Ed Sheeran&#10;A Thousand Years - Christina Perri"></textarea>
+          </label>
+          <button id="analyze-spotify" class="primary">Sugerir encaixes</button>
+          <div id="spotify-result" class="spotify-result"></div>
+        </div>
+      </section>
+
+      <section id="deslocamento" class="travel-section">
+        <div class="section-title">
+          <span>Logística transparente</span>
+          <h2>Deslocamento por distância, pedágio e quantidade de veículos.</h2>
+          <p>Informe o CEP para estimarmos deslocamento, veículos e possíveis pedágios de forma automática.</p>
+        </div>
+        <div class="travel-grid">
+          <article class="travel-card">
+            <h3>Origem fixa</h3>
+            <p>Paço Municipal de São Bernardo do Campo/SP - CEP 09750-700</p>
+            <label>CEP do evento<input id="travel-zip" placeholder="Ex.: 01310-100" /></label>
+            <label class="checkline"><input id="round-trip" type="checkbox" checked /> considerar ida e volta</label>
+            <button id="calculate-travel" class="primary">Calcular deslocamento</button>
+          </article>
+          <article class="travel-card">
+            <h3>Variáveis de transporte</h3>
+            <div class="instrument-pills" id="transport-instruments"></div>
+            <label class="checkline"><input id="complete-sound" type="checkbox" /> estrutura de som completa</label>
+          </article>
+          <article class="travel-result" id="travel-result"></article>
+        </div>
+      </section>
+
+      <section id="contratar" class="checkout-preview">
+        <div>
+          <span>Próximos passos</span>
+          <h2>Depois da escolha, tudo fica claro.</h2>
+          <p>Data disponível, deslocamento, formação, repertório, estrutura técnica e continuidade em uma jornada única.</p>
+        </div>
+        <div class="checkout-card">
+          <strong id="total-price">R$ 4.800,00</strong>
+          <span>Estimativa inicial</span>
+          <ul>
+            <li>Dados do evento salvos</li>
+            <li>Condições de continuidade definidas</li>
+            <li>Agenda com datas bloqueadas</li>
+            <li>Roteiro musical editável até aprovação</li>
+          </ul>
+          <a class="primary" href="./contrato.html">Preencher dados para contrato</a>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="moment-dialog">
+      <button id="close-dialog" class="dialog-close">Fechar</button>
+      <img id="dialog-image" src="./assets/music-details.png" alt="" />
+      <div>
+        <span id="dialog-moment"></span>
+        <h2 id="dialog-title"></h2>
+        <p id="dialog-copy"></p>
+        <div id="dialog-tags" class="dialog-tags"></div>
+        <button id="dialog-play" class="primary">Ouvir trecho MIDI</button>
+      </div>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./supabase-config.js"></script>
+    <script src="./supabase-client.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
