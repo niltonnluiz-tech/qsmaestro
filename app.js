@@ -735,19 +735,19 @@ function formatAudioMediaUrl(url) {
   if (!url) return "";
   const str = url.trim();
 
-  // Google Drive
-  const driveMatch = str.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)([a-zA-Z0-9_-]+)/i);
+  // 1. Google Drive (file/d/ID, open?id=ID, uc?id=ID, docs.google.com/uc?id=ID, lh3.googleusercontent.com/d/ID)
+  const driveMatch = str.match(/(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)|docs\.google\.com\/uc\?.*id=|lh3\.googleusercontent\.com\/d\/)([a-zA-Z0-9_-]+)/i);
   if (driveMatch && driveMatch[1]) {
     const fileId = driveMatch[1];
-    return `https://docs.google.com/uc?export=open&id=${fileId}`;
+    return `https://lh3.googleusercontent.com/d/${fileId}`;
   }
 
-  // Dropbox
+  // 2. Dropbox
   if (str.includes("dropbox.com")) {
     return str.replace("dl=0", "raw=1").replace("dl=1", "raw=1");
   }
 
-  // OneDrive
+  // 3. OneDrive
   if (str.includes("onedrive.live.com") || str.includes("1drv.ms")) {
     return str.replace("download=0", "download=1");
   }
@@ -756,7 +756,7 @@ function formatAudioMediaUrl(url) {
 }
 
 function getAudioMediaInfo(url) {
-  if (!url) return { isEmbed: false, audioUrl: "" };
+  if (!url) return { isEmbed: false, audioUrl: "", provider: "" };
   const strUrl = url.trim();
 
   // 1. YouTube
@@ -789,12 +789,13 @@ function getAudioMediaInfo(url) {
   }
 
   // 4. Google Drive
-  const driveMatch = strUrl.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)([a-zA-Z0-9_-]+)/i);
+  const driveMatch = strUrl.match(/(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)|docs\.google\.com\/uc\?.*id=|lh3\.googleusercontent\.com\/d\/)([a-zA-Z0-9_-]+)/i);
   if (driveMatch && driveMatch[1]) {
     const fileId = driveMatch[1];
     return {
       isEmbed: false,
-      audioUrl: `https://docs.google.com/uc?export=open&id=${fileId}`,
+      isGoogleDrive: true,
+      audioUrl: `https://lh3.googleusercontent.com/d/${fileId}`,
       drivePreviewUrl: `https://drive.google.com/file/d/${fileId}/preview`,
       provider: "Google Drive"
     };
@@ -809,7 +810,16 @@ function getAudioMediaInfo(url) {
     };
   }
 
-  // 6. Direct file
+  // 6. OneDrive
+  if (strUrl.includes("onedrive.live.com") || strUrl.includes("1drv.ms")) {
+    return {
+      isEmbed: false,
+      audioUrl: strUrl.replace("download=0", "download=1"),
+      provider: "OneDrive"
+    };
+  }
+
+  // 7. Direct file
   return {
     isEmbed: false,
     audioUrl: formatAudioMediaUrl(strUrl),
@@ -939,11 +949,21 @@ function openAudioModal(songItem) {
         <div style="position:relative; width:100%; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; margin-top:12px; background:#000;">
           <iframe src="${audioInfo.embedUrl}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe>
         </div>
+      ` : audioInfo.isGoogleDrive ? `
+        <div style="margin-top:12px;">
+          <audio controls autoplay src="${audioInfo.audioUrl}" style="width:100%; border-radius:8px; accent-color:#d4af37;" onError="this.style.display='none'; if(document.getElementById('drive-fallback-${songItem.id}')) document.getElementById('drive-fallback-${songItem.id}').style.display='block';"></audio>
+          <div id="drive-fallback-${songItem.id}" style="display:none; margin-top:10px; width:100%; height:140px; border-radius:12px; overflow:hidden; border:1px solid rgba(212,175,55,0.4);">
+            <iframe src="${audioInfo.drivePreviewUrl}" style="width:100%; height:140px; border:none;" allow="autoplay"></iframe>
+          </div>
+          <p style="font-size:11px; color:#aaa; margin-top:8px;">
+            <a href="${audioInfo.drivePreviewUrl}" target="_blank" rel="noopener" style="color:#d4af37; text-decoration:underline; font-weight:600;">Ouvir no Google Drive ↗</a>
+          </p>
+        </div>
       ` : audioInfo.audioUrl ? `
         <audio controls autoplay src="${audioInfo.audioUrl}" style="width:100%; border-radius:8px; accent-color:#d4af37;" onError="this.style.display='none'; if(document.getElementById('drive-fallback-${songItem.id}')) document.getElementById('drive-fallback-${songItem.id}').style.display='block';"></audio>
         ${audioInfo.drivePreviewUrl ? `
           <div id="drive-fallback-${songItem.id}" style="display:none; margin-top:10px;">
-            <p style="font-size:12px; color:#aaa; margin-bottom:6px;">Player direto do Google Drive indisponível. <a href="${audioInfo.drivePreviewUrl}" target="_blank" rel="noopener" style="color:#d4af37; text-decoration:underline; font-weight:bold;">Clique para ouvir no Google Drive ↗</a></p>
+            <p style="font-size:12px; color:#aaa; margin-bottom:6px;">Player direto indisponível. <a href="${audioInfo.drivePreviewUrl}" target="_blank" rel="noopener" style="color:#d4af37; text-decoration:underline; font-weight:bold;">Clique para ouvir no Google Drive ↗</a></p>
           </div>
         ` : ''}
       ` : `
@@ -1024,6 +1044,7 @@ function renderPreviewVideos(activeId) {
       </article>
     `;
   } else {
+    const audioInfo = getAudioMediaInfo(active.audioUrl || "");
     hero.innerHTML = `
       <article class="preview-main preview-audio-card">
         <img src="${active.image}" alt="${active.title}">
@@ -1031,9 +1052,20 @@ function renderPreviewVideos(activeId) {
           <span>🎵 ${active.formation} • ${active.music}</span>
           <h3>${active.title}</h3>
           <p>${active.description}</p>
-          ${active.audioUrl ? `
+          ${audioInfo.isEmbed ? `
+            <div style="margin-top:14px; width:100%; max-width:540px; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+              <iframe src="${audioInfo.embedUrl}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe>
+            </div>
+          ` : audioInfo.isGoogleDrive ? `
             <div style="margin-top:14px; width:100%; max-width:440px;">
-              <audio controls autoplay src="${active.audioUrl}" style="width:100%; border-radius:8px; accent-color:var(--gold, #d4af37); filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));"></audio>
+              <audio controls autoplay src="${audioInfo.audioUrl}" style="width:100%; border-radius:8px; accent-color:var(--gold, #d4af37); filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));" onError="this.style.display='none'; document.getElementById('hero-drive-iframe-${active.id}').style.display='block';"></audio>
+              <div id="hero-drive-iframe-${active.id}" style="display:none; margin-top:10px; width:100%; height:140px; border-radius:12px; overflow:hidden; border:1px solid rgba(212,175,55,0.4);">
+                <iframe src="${audioInfo.drivePreviewUrl}" style="width:100%; height:140px; border:none;" allow="autoplay"></iframe>
+              </div>
+            </div>
+          ` : audioInfo.audioUrl ? `
+            <div style="margin-top:14px; width:100%; max-width:440px;">
+              <audio controls autoplay src="${audioInfo.audioUrl}" style="width:100%; border-radius:8px; accent-color:var(--gold, #d4af37); filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));"></audio>
             </div>
           ` : ""}
           <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
