@@ -1,10 +1,10 @@
 // MAESTTRO - Supabase Client SDK integration
 // Fornece leitura/escrita resiliente para o aplicativo e painel administrativo.
 
-let supabase = null;
+let _supabaseClientInstance = null;
 
 function getSupabaseClient() {
-  if (supabase) return supabase;
+  if (_supabaseClientInstance) return _supabaseClientInstance;
   const createClient = window.supabase?.createClient || (typeof window.supabase === "function" ? window.supabase : null);
   if (window.MAESTTRO_SUPABASE && createClient) {
     try {
@@ -14,9 +14,9 @@ function getSupabaseClient() {
       } else if (cleanUrl.endsWith("/rest/v1")) {
         cleanUrl = cleanUrl.replace("/rest/v1", "");
       }
-      supabase = createClient(cleanUrl, window.MAESTTRO_SUPABASE.anonKey);
+      _supabaseClientInstance = createClient(cleanUrl, window.MAESTTRO_SUPABASE.anonKey);
       console.log("MAESTTRO: Conectado com sucesso ao Supabase em", cleanUrl);
-      return supabase;
+      return _supabaseClientInstance;
     } catch (e) {
       console.error("MAESTTRO: Erro ao inicializar o cliente Supabase:", e);
     }

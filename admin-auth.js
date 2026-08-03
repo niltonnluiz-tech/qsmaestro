@@ -187,9 +187,10 @@ document.getElementById("admin-login-form")?.addEventListener("submit", (event) 
   }
 
   // Se Supabase estiver ativo, tenta autenticar por lá como fallback
-  if (typeof isSupabaseActive === "function" && isSupabaseActive()) {
+  const sbClient = typeof getSupabaseClient === "function" ? getSupabaseClient() : null;
+  if (sbClient && sbClient.auth) {
     const email = user.includes("@") ? user : `${user.toLowerCase()}@maesttro.com.br`;
-    supabase.auth.signInWithPassword({
+    sbClient.auth.signInWithPassword({
       email: email,
       password: password
     }).then(({ data, error }) => {

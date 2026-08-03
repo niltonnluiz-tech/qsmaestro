@@ -2704,9 +2704,9 @@ async function initApp() {
   });
 
   // Supabase Realtime: Atualização instantânea ao detectar mudanças nas tabelas do Supabase
-  if (typeof getSupabaseClient === "function" || (typeof window !== "undefined" && window.supabase)) {
+  if (typeof getSupabaseClient === "function") {
     try {
-      const activeClient = typeof getSupabaseClient === "function" ? getSupabaseClient() : (typeof supabase !== "undefined" ? supabase : null);
+      const activeClient = getSupabaseClient();
       if (activeClient && typeof activeClient.channel === "function") {
         activeClient.channel("maesttro-realtime-global")
           .on("postgres_changes", { event: "*", schema: "public" }, (payload) => {
