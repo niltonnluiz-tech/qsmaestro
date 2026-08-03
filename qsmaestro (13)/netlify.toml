@@ -1,6 +1,0 @@
-# Configuração do Netlify para o diretório raiz
-# Redireciona o Netlify para buscar e buildar a partir da pasta correta do projeto
-
-[build]
-  base = "MAESTTRO/codigo-completo-multiarquivo"
-  publish = "MAESTTRO/codigo-completo-multiarquivo"

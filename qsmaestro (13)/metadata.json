@@ -1,6 +1,0 @@
-{
-  "name": "MAESTTRO",
-  "description": "A primeira plataforma self-service do mundo para contratar músicos ao vivo.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
