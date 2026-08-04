@@ -923,51 +923,60 @@ function openAudioModal(songItem) {
   if (!dialog) {
     dialog = document.createElement("dialog");
     dialog.id = "audio-player-dialog";
-    dialog.style.cssText = "border:none; border-radius:16px; padding:24px; max-width:580px; width:90%; background:#1e2221; color:white; box-shadow:0 20px 50px rgba(0,0,0,0.5); z-index:9999;";
+    dialog.style.cssText = "border:none; border-radius:16px; padding:24px; max-width:580px; width:90%; background:#1e2221; color:white; box-shadow:0 20px 50px rgba(0,0,0,0.6); z-index:9999;";
     document.body.appendChild(dialog);
   }
 
   const audioInfo = getAudioMediaInfo(songItem.audioUrl || "");
+  const artistText = (songItem.artist && songItem.artist !== "A definir" && songItem.artist.trim() !== "") ? songItem.artist : (songItem.music || "");
 
   dialog.innerHTML = `
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; gap:12px;">
       <div>
-        <span style="font-size:12px; color:var(--gold, #d4af37); text-transform:uppercase; font-weight:700;">
-          🎵 Prévia Musical • ${songItem.formation || songItem.moment || "Repertório"} ${audioInfo.provider ? `• ${audioInfo.provider}` : ""}
+        <span style="font-size:12px; color:var(--gold, #d4af37); text-transform:uppercase; font-weight:700; letter-spacing:0.5px;">
+          🎵 TOCADOR MUSICAL • ${songItem.formation || songItem.moment || "Repertório"} ${audioInfo.provider ? `• ${audioInfo.provider}` : ""}
         </span>
-        <h3 style="margin:4px 0 0 0; font-size:18px; font-weight:700; color:white;">${songItem.title}</h3>
+        <h3 style="margin:4px 0 0 0; font-size:20px; font-weight:700; color:white;">${songItem.title}</h3>
       </div>
-      <button id="close-audio-dialog" style="background:rgba(255,255,255,0.12); border:none; color:white; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:700;">Fechar ✕</button>
+      <button id="close-audio-dialog" style="background:rgba(255,255,255,0.12); border:none; color:white; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:700; font-size:14px;">Fechar ✕</button>
     </div>
 
     <div style="text-align:center; padding:12px 0;">
-      <img src="${songItem.image || './assets/music-details.png'}" style="width:130px; height:130px; object-fit:cover; border-radius:12px; margin-bottom:12px; box-shadow:0 4px 14px rgba(0,0,0,0.5);" />
-      <p style="font-size:15px; color:#d4af37; font-weight:700; margin:0 0 6px 0;">${songItem.music || songItem.artist || "Artista a definir"}</p>
-      <p style="font-size:13px; color:#ccc; margin:0 0 16px 0;">${(songItem.description || songItem.copy || "").replace(/\s*\(Arquivo:[^)]+\)/gi, "")}</p>
+      <img src="${songItem.image || './assets/music-details.png'}" style="width:140px; height:140px; object-fit:cover; border-radius:12px; margin-bottom:12px; box-shadow:0 6px 18px rgba(0,0,0,0.5); border:1px solid rgba(212,175,55,0.3);" />
+      ${artistText ? `<p style="font-size:15px; color:#d4af37; font-weight:700; margin:0 0 6px 0;">${artistText}</p>` : ''}
+      <p style="font-size:13px; color:#ccc; margin:0 0 16px 0; max-width:480px; margin-left:auto; margin-right:auto;">${(songItem.description || songItem.copy || "").replace(/\s*\(Arquivo:[^)]+\)/gi, "")}</p>
 
       ${audioInfo.isEmbed ? `
-        <div style="position:relative; width:100%; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; margin-top:12px; background:#000;">
+        <div style="position:relative; width:100%; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; margin-top:12px; background:#000; border:1px solid rgba(212,175,55,0.3);">
           <iframe src="${audioInfo.embedUrl}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe>
         </div>
       ` : audioInfo.isGoogleDrive ? `
-        <div style="margin-top:12px;">
-          <audio controls autoplay src="${audioInfo.audioUrl}" style="width:100%; border-radius:8px; accent-color:#d4af37;" onError="this.style.display='none'; if(document.getElementById('drive-fallback-${songItem.id}')) document.getElementById('drive-fallback-${songItem.id}').style.display='block';"></audio>
-          <div id="drive-fallback-${songItem.id}" style="display:none; margin-top:10px; width:100%; height:140px; border-radius:12px; overflow:hidden; border:1px solid rgba(212,175,55,0.4);">
-            <iframe src="${audioInfo.drivePreviewUrl}" style="width:100%; height:140px; border:none;" allow="autoplay"></iframe>
+        <div style="margin-top:12px; background:rgba(0,0,0,0.3); padding:16px; border-radius:12px; border:1px solid rgba(212,175,55,0.3);">
+          <audio id="modal-native-audio-${songItem.id}" controls autoplay src="${audioInfo.audioUrl}" style="width:100%; border-radius:8px; accent-color:#d4af37;" onError="this.style.display='none'; document.getElementById('drive-fallback-${songItem.id}').style.display='block';"></audio>
+          <div id="drive-fallback-${songItem.id}" style="display:none; margin-top:10px; width:100%; height:160px; border-radius:12px; overflow:hidden; border:1px solid rgba(212,175,55,0.4);">
+            <iframe src="${audioInfo.drivePreviewUrl}" style="width:100%; height:160px; border:none;" allow="autoplay"></iframe>
           </div>
-          <p style="font-size:11px; color:#aaa; margin-top:8px;">
-            <a href="${audioInfo.drivePreviewUrl}" target="_blank" rel="noopener" style="color:#d4af37; text-decoration:underline; font-weight:600;">Ouvir no Google Drive ↗</a>
+          <p style="font-size:12px; color:#aaa; margin-top:10px;">
+            📁 Áudio em nuvem (Google Drive). <a href="${audioInfo.drivePreviewUrl}" target="_blank" rel="noopener" style="color:#d4af37; text-decoration:underline; font-weight:700;">Abrir direto no Drive ↗</a>
           </p>
         </div>
       ` : audioInfo.audioUrl ? `
-        <audio controls autoplay src="${audioInfo.audioUrl}" style="width:100%; border-radius:8px; accent-color:#d4af37;" onError="this.style.display='none'; if(document.getElementById('drive-fallback-${songItem.id}')) document.getElementById('drive-fallback-${songItem.id}').style.display='block';"></audio>
-        ${audioInfo.drivePreviewUrl ? `
-          <div id="drive-fallback-${songItem.id}" style="display:none; margin-top:10px;">
-            <p style="font-size:12px; color:#aaa; margin-bottom:6px;">Player direto indisponível. <a href="${audioInfo.drivePreviewUrl}" target="_blank" rel="noopener" style="color:#d4af37; text-decoration:underline; font-weight:bold;">Clique para ouvir no Google Drive ↗</a></p>
-          </div>
-        ` : ''}
+        <div style="margin-top:12px; background:rgba(0,0,0,0.3); padding:16px; border-radius:12px; border:1px solid rgba(212,175,55,0.3);">
+          <audio controls autoplay src="${audioInfo.audioUrl}" style="width:100%; border-radius:8px; accent-color:#d4af37;" onError="this.style.display='none'; document.getElementById('drive-fallback-${songItem.id}').style.display='block';"></audio>
+          ${audioInfo.drivePreviewUrl ? `
+            <div id="drive-fallback-${songItem.id}" style="display:none; margin-top:10px;">
+              <p style="font-size:12px; color:#aaa; margin-bottom:6px;">Player nativo indisponível. <a href="${audioInfo.drivePreviewUrl}" target="_blank" rel="noopener" style="color:#d4af37; text-decoration:underline; font-weight:bold;">Ouvir no Google Drive ↗</a></p>
+            </div>
+          ` : ''}
+        </div>
       ` : `
-        <button id="synth-play-btn" style="background:var(--gold, #d4af37); color:#121212; border:none; padding:12px 24px; border-radius:8px; font-weight:800; cursor:pointer;">▶ Tocar Melodia Sintetizada</button>
+        <div style="margin-top:12px; background:rgba(0,0,0,0.3); padding:16px; border-radius:12px; border:1px solid rgba(212,175,55,0.3);">
+          <p style="font-size:12px; color:#d4af37; font-weight:600; margin-bottom:10px;">🎼 Sintetizador de Demonstração (Sem URL de arquivo cadastrada)</p>
+          <div style="display:flex; align-items:center; justify-content:center; gap:12px;">
+            <button id="synth-play-btn" style="background:var(--gold, #d4af37); color:#121212; border:none; padding:10px 22px; border-radius:8px; font-weight:800; cursor:pointer; font-size:14px; display:flex; align-items:center; gap:6px;">▶ Iniciar Melodia Sintetizada</button>
+          </div>
+          <p style="font-size:11px; color:#999; margin-top:10px;">Para tocar a gravação real em áudio/MP3, cadastre a URL do Google Drive ou Spotify no menu Admin.</p>
+        </div>
       `}
     </div>
   `;
@@ -992,6 +1001,14 @@ function openAudioModal(songItem) {
   };
 
   dialog.showModal();
+
+  // Se houver um player de áudio nativo, força a execução
+  setTimeout(() => {
+    const nativeAudio = dialog.querySelector("audio");
+    if (nativeAudio) {
+      nativeAudio.play().catch(() => {});
+    }
+  }, 100);
 }
 
 function renderPreviewVideos(activeId) {
@@ -1010,7 +1027,7 @@ function renderPreviewVideos(activeId) {
     id: s.id || `song-${s.title}`,
     title: s.title,
     formation: s.moment || "Prévia musical",
-    music: s.artist || "A definir",
+    music: (s.artist && s.artist !== "A definir") ? s.artist : "Repertório",
     description: (s.copy || `Execução da música ${s.title}`).replace(/\s*\(Arquivo:[^)]+\)/gi, ""),
     image: s.image || "./assets/music-details.png",
     audioUrl: s.audioUrl || "",
@@ -1069,7 +1086,7 @@ function renderPreviewVideos(activeId) {
             </div>
           ` : ""}
           <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
-            <button class="primary" data-audio-play="${active.id}">Ouvir prévia musical 🎵</button>
+            <button class="primary" data-audio-play="${active.id}">Ouvir prévia no tocador 🎵</button>
           </div>
         </div>
       </article>
@@ -1081,14 +1098,25 @@ function renderPreviewVideos(activeId) {
       <img src="${item.image}" alt="${item.title}">
       <div>
         <strong>${item.title}</strong>
-        <span>${item.formation} • ${item.music} ${item.type === 'audio' ? '🎵' : '🎥'}</span>
+        <span>${item.formation} ${item.music && item.music !== "Repertório" ? `• ${item.music}` : ''} ${item.type === 'audio' ? '🎵' : '🎥'}</span>
       </div>
       <span class="play-dot">${item.type === 'audio' ? '🎵' : '▶'}</span>
     </article>
   `).join("");
 
   document.querySelectorAll("[data-preview-id]").forEach((item) => {
-    item.addEventListener("click", () => renderPreviewVideos(item.dataset.previewId));
+    item.addEventListener("click", () => {
+      const prevId = item.dataset.previewId;
+      renderPreviewVideos(prevId);
+      const clickedItem = allItems.find((s) => s.id === prevId);
+      if (clickedItem) {
+        if (clickedItem.type === "audio") {
+          openAudioModal(clickedItem);
+        } else if (clickedItem.type === "video") {
+          openVideoModal(clickedItem);
+        }
+      }
+    });
   });
 
   document.querySelectorAll("[data-video-play]").forEach((button) => {
@@ -2069,16 +2097,18 @@ function renderSpotify() {
     `;
     activeSongs.forEach((song) => {
       const cleanCopy = (song.copy || "").replace(/\s*\(Arquivo:[^)]+\)/gi, "");
+      const artistDisplay = (song.artist && song.artist !== "A definir" && song.artist.trim() !== "") ? `Artista: <b>${song.artist}</b> • ` : "";
+      const displayTitle = song.title || "Música Cadastrada";
       html += `
-        <div class="spotify-fit" style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.06); padding:10px 14px; border-radius:10px; margin-bottom:4px;">
+        <div class="spotify-fit" style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.06); padding:10px 14px; border-radius:10px; margin-bottom:6px;">
           <div style="flex:1; padding-right:10px;">
-            <strong style="color:white; font-size:14px; display:block;">${song.title}</strong>
-            <span style="font-size:12px; color:#bbb;">${song.artist || "A definir"} • Encaixe: <b style="color:var(--gold, #d4af37);">${song.moment || "Cerimônia"}</b></span>
-            ${cleanCopy ? `<p style="font-size:11px; color:#888; margin:2px 0 0 0;">${cleanCopy}</p>` : ""}
+            <strong style="color:var(--gold, #d4af37); font-size:15px; font-weight:700; display:block; margin-bottom:2px;">${displayTitle}</strong>
+            <span style="font-size:12px; color:#ccc; display:block;">${artistDisplay}Encaixe: <b style="color:white;">${song.moment || "Cerimônia"}</b></span>
+            ${cleanCopy ? `<p style="font-size:11px; color:#aaa; margin:3px 0 0 0;">${cleanCopy}</p>` : ""}
           </div>
           <div style="display:flex; gap:8px; align-items:center;">
-            <button data-spotify-play="${song.id || song.title}" style="background:var(--gold, #d4af37); color:#121212; border:none; padding:7px 14px; border-radius:6px; font-weight:700; cursor:pointer; font-size:12px;">▶ Ouvir 🎵</button>
-            <button data-use-song="${song.title}" style="background:rgba(255,255,255,0.12); color:white; border:none; padding:7px 12px; border-radius:6px; font-weight:600; cursor:pointer; font-size:12px;">Usar</button>
+            <button data-spotify-play="${song.id || song.title}" style="background:var(--gold, #d4af37); color:#121212; border:none; padding:8px 16px; border-radius:6px; font-weight:700; cursor:pointer; font-size:12px; display:flex; align-items:center; gap:4px;">▶ Ouvir 🎵</button>
+            <button data-use-song="${song.title}" style="background:rgba(255,255,255,0.12); color:white; border:none; padding:8px 14px; border-radius:6px; font-weight:600; cursor:pointer; font-size:12px;">Usar</button>
           </div>
         </div>
       `;
@@ -2515,19 +2545,27 @@ function bindAdminControls() {
 }
 
 function openMoment(id) {
-  const item = curatedMoments().find((moment) => moment.id === id);
+  const item = curatedMoments().find((moment) => moment.id === id) || baseMoments.find((m) => m.id === id);
+  if (!item) return;
   document.getElementById("dialog-image").src = item.image;
   document.getElementById("dialog-moment").textContent = item.moment;
   document.getElementById("dialog-title").textContent = item.title;
   document.getElementById("dialog-copy").textContent = item.copy;
-  document.getElementById("dialog-tags").innerHTML = item.tags.map((tag) => `<span>${tag}</span>`).join("");
-  document.getElementById("dialog-play").onclick = () => playNotes(item.notes);
+  document.getElementById("dialog-tags").innerHTML = (item.tags || []).map((tag) => `<span>${tag}</span>`).join("");
+  document.getElementById("dialog-play").onclick = () => {
+    document.getElementById("moment-dialog")?.close();
+    openAudioModal(item);
+  };
   document.getElementById("moment-dialog").showModal();
 }
 
 function playMoment(id) {
-  const item = curatedMoments().find((moment) => moment.id === id);
-  playNotes(item.notes);
+  const item = curatedMoments().find((moment) => moment.id === id) || baseMoments.find((m) => m.id === id || m.title === id);
+  if (item) {
+    openAudioModal(item);
+  } else {
+    playNotes([440, 523.25, 659.25, 587.33, 523.25]);
+  }
 }
 
 function playNotes(notes) {
