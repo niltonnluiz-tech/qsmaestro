@@ -942,7 +942,6 @@ function openAudioModal(songItem) {
     </div>
 
     <div style="text-align:center; padding:12px 0;">
-      <img src="${songItem.image || './assets/music-details.png'}" style="width:140px; height:140px; object-fit:cover; border-radius:12px; margin-bottom:12px; box-shadow:0 6px 18px rgba(0,0,0,0.5); border:1px solid rgba(212,175,55,0.3);" />
       ${artistText ? `<p style="font-size:15px; color:#d4af37; font-weight:700; margin:0 0 6px 0;">${artistText}</p>` : ''}
       <p style="font-size:13px; color:#ccc; margin:0 0 16px 0; max-width:480px; margin-left:auto; margin-right:auto;">${(songItem.description || songItem.copy || "").replace(/\s*\(Arquivo:[^)]+\)/gi, "")}</p>
 
